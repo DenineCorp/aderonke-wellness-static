@@ -1,9 +1,9 @@
 ---
 title: "Apathy in Dementia: What It Is, Why It Happens, and How to Respond"
-description: "Apathy is one of the most common and least understood symptoms of dementia. Here's what it actually is, how it differs from depression, and what helps. This article is the consolidation target for the old site's ten \"apathy\" posts — see redirect-map.md."
+description: "Apathy is one of the most common and least understood symptoms of dementia. Here's what it actually is, how it differs from depression, and what helps."
 pillar: "dementia-care"
-pubDate: 2026-10-29
-updatedDate: 2026-10-29
+pubDate: 2026-09-17
+updatedDate: 2026-09-17
 author: "Aderonke Agboji"
 credentials: "RN, PhD Candidate"
 ---

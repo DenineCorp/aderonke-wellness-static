@@ -1,0 +1,28 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+	article: CollectionEntry<'articles'>;
+}
+const { article } = Astro.props;
+
+const pillarLabels: Record<string, string> = {
+	'mental-wellness': 'Mental Wellness',
+	'dementia-care': 'Dementia & Cognitive Care',
+	'caregiver-support': 'Caregiver Support',
+};
+
+const href = `/${article.data.pillar}/${article.id}/`;
+---
+
+<article class="aw-featured">
+	<div class="aw-featured-media aw-photo-slot aw-photo-slot-wide" aria-hidden="true">
+		Image placeholder
+	</div>
+	<div class="aw-featured-body">
+		<p class="aw-card-eyebrow">{pillarLabels[article.data.pillar]} · Featured</p>
+		<h2><a href={href} style="color: inherit; text-decoration: none;">{article.data.title}</a></h2>
+		<p>{article.data.description}</p>
+		<p><a href={href}>Read the article →</a></p>
+	</div>
+</article>

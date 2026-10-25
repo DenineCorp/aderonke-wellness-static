@@ -1,11 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
-import { getCollection } from 'astro:content';
+import { getPublishedArticles } from '../../lib/site';
 
-const articles = (await getCollection('articles', (a) => a.data.pillar === 'dementia-care')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+const articles = (await getPublishedArticles()).filter((a) => a.data.pillar === 'dementia-care');
 ---
 
 <BaseLayout

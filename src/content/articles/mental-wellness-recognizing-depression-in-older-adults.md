@@ -2,8 +2,8 @@
 title: "Is It Depression or Normal Aging? How to Tell the Difference"
 description: "Depression isn't a normal part of aging, but in older adults it often looks nothing like sadness. Here's how to tell the difference and what to do next."
 pillar: "mental-wellness"
-pubDate: 2026-10-27
-updatedDate: 2026-10-27
+pubDate: 2026-09-15
+updatedDate: 2026-09-15
 author: "Aderonke Agboji"
 credentials: "RN, PhD Candidate"
 ---

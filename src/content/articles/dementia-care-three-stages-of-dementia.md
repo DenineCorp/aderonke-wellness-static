@@ -2,8 +2,8 @@
 title: "The 3 Stages of Dementia: What Changes at Each One"
 description: "Dementia symptoms change predictably over time, even though the pace varies by person. Here's what shifts at each of the three stages, and why early diagnosis matters."
 pillar: "dementia-care"
-pubDate: 2026-11-12
-updatedDate: 2026-11-12
+pubDate: 2026-10-10
+updatedDate: 2026-10-10
 author: "Aderonke Agboji"
 credentials: "RN, PhD Candidate"
 ---

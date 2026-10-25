@@ -1,31 +1,25 @@
 ---
 title: "Loneliness in Older Adults: Why It's a Health Risk, Not Just a Feeling"
-description: "The U.S. Surgeon General has linked loneliness to a 50% higher dementia risk in older adults and mortality comparable to smoking. Here's what the research actually shows, and what helps."
+description: "Over half of Canadians aged 50+ report loneliness, and it's linked to a meaningfully higher risk of dementia. Here's what the research actually shows, and what helps."
 pillar: "mental-wellness"
-pubDate: 2026-11-10
-updatedDate: 2026-11-10
+pubDate: 2026-10-08
+updatedDate: 2026-10-08
 author: "Aderonke Agboji"
 credentials: "RN, PhD Candidate"
 ---
-It's tempting to treat loneliness as an unpleasant but harmless emotion — something to feel bad about, not something to treat. The U.S. Surgeon General's 2023 advisory on loneliness and isolation makes the case that this framing is wrong: lacking social connection carries measurable physical health risks, and for older adults, some of those risks are substantial.
+It's tempting to treat loneliness as an unpleasant but harmless emotion — something to feel bad about, not something to treat. The research on loneliness and isolation makes the case that this framing is wrong: lacking social connection carries measurable physical and cognitive health risks, and for older adults, some of those risks are substantial.
 
-## The numbers behind the advisory
+## The numbers
 
-The Surgeon General's report found that poor social connection is associated with:
+A national survey from Canada's National Institute on Ageing found that 57% of Canadians report experiencing loneliness, and 43% are at risk of social isolation — figures that have held roughly steady across recent survey years. Researchers draw a distinction between the two: social isolation is the objective state of having little social contact, while loneliness is the subjective feeling of being disconnected, and a person can experience either one without the other.
 
-- A **29% higher risk of heart disease**
-- A **32% higher risk of stroke**
-- A **50% higher risk of developing dementia** in older adults specifically
+Women are more likely than men to fall into the highest-loneliness group, according to a Statistics Canada-based analysis of older adults, even though most older Canadians (around 65%) report low loneliness overall.
 
-Its most cited comparison is stark: the mortality risk from lacking social connection is comparable to smoking up to 15 cigarettes a day — and some coverage of the report put the increased risk of premature death at around 26%.
-
-This isn't a fringe finding. A separate 2022 Johns Hopkins study found that socially isolated older adults had a meaningfully higher likelihood of developing dementia than their more connected peers, independent of other risk factors.
+The dementia link is where this stops being just an emotional concern: a Florida State University study, cited by Canada's Schlegel-UW Research Institute for Aging, found loneliness was associated with a 31% increased risk of developing dementia.
 
 ## It's not just an "older adult" problem — but older adults face it differently
 
-One finding from the advisory is worth correcting a common assumption: loneliness isn't primarily a problem of old age. A 2021 poll found 79% of adults 18-24 reported loneliness, compared to 41% of adults 66 and older. Younger people report feeling lonely more often.
-
-What's different for older adults isn't necessarily the frequency of loneliness — it's the downstream health consequences, and the structural reasons it tends to deepen with age: retirement removing a daily social structure, the death of a spouse or longtime friends, driving limitations that shrink the radius of easy social contact, and hearing or mobility changes that make social settings more effortful.
+Loneliness isn't primarily a problem of old age — younger adults frequently report it too, often at higher rates than seniors. What's different for older adults isn't necessarily the frequency of loneliness — it's the downstream health consequences, and the structural reasons it tends to deepen with age: retirement removing a daily social structure, the death of a spouse or longtime friends, driving limitations that shrink the radius of easy social contact, and hearing or mobility changes that make social settings more effortful.
 
 ## Why connection affects physical health, not just mood
 

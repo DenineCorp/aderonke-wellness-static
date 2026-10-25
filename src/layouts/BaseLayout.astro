@@ -1,15 +1,19 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { isPreview } from '../lib/site';
 import '../styles/global.css';
 
 interface Props {
 	title: string;
 	description: string;
 	jsonLd?: Record<string, unknown>;
+	ogImage?: string;
 }
-const { title, description, jsonLd } = Astro.props;
+const { title, description, jsonLd, ogImage } = Astro.props;
 const currentPath = Astro.url.pathname;
+const fullTitle = `${title} — Aderonke Wellness`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://aderonkewellness.netlify.app');
 ---
 
 <!doctype html>
@@ -17,17 +21,32 @@ const currentPath = Astro.url.pathname;
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>{title} — Aderonke Wellness</title>
+	<title>{fullTitle}</title>
 	<meta name="description" content={description} />
+	<link rel="canonical" href={canonicalURL} />
+	{isPreview && <meta name="robots" content="noindex, nofollow" />}
 	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+	<meta property="og:site_name" content="Aderonke Wellness" />
+	<meta property="og:title" content={fullTitle} />
+	<meta property="og:description" content={description} />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={canonicalURL} />
+	{ogImage && <meta property="og:image" content={ogImage} />}
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={fullTitle} />
+	<meta name="twitter:description" content={description} />
+
 	{jsonLd && (
 		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 	)}
 </head>
 <body>
-	<div class="aw-preview-banner">
-		Static preview build for Netlify — a parallel version of the WordPress site, built from the same content.
-	</div>
+	{isPreview && (
+		<div class="aw-preview-banner">
+			Internal preview — not the live site. Set PUBLIC_SITE_STAGE=production in Netlify to remove this banner and allow search indexing.
+		</div>
+	)}
 	<Header currentPath={currentPath} />
 	<main id="aw-main">
 		<slot />

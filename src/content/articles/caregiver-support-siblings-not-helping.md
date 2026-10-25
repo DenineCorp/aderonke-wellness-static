@@ -2,8 +2,8 @@
 title: "How to Talk to Siblings Who Aren't Helping with Caregiving"
 description: "In 43% of families, one sibling ends up doing nearly all the caregiving. Here's how to actually get others involved, instead of just getting more resentful."
 pillar: "caregiver-support"
-pubDate: 2026-11-05
-updatedDate: 2026-11-05
+pubDate: 2026-10-01
+updatedDate: 2026-10-01
 author: "Aderonke Agboji"
 credentials: "RN, PhD Candidate"
 ---

@@ -1,30 +1,34 @@
 /*
-Same design system as the WordPress build (wp-content/themes/aderonke-wellness/style.css
-in the sibling ADERONKE project) — same tokens, same class names, so the
-two versions of the site look identical even though they're built very
-differently under the hood.
+Design system v2 — warm, calm, human. Replaces the bright-teal "AI
+template" look of the first draft per client/reviewer feedback: soft
+cream background, deep sage primary, terracotta accent used sparingly.
+Serif headings (Fraunces) for warmth, system sans for body (keeps body
+text fast and native-feeling rather than loading a second webfont).
 */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&display=swap');
 
 /* ---------- Design tokens ---------- */
 :root {
-	--aw-color-primary: #0b6e6a;
-	--aw-color-primary-dark: #084f4c;
-	--aw-color-primary-tint: #e6f3f2;
-	--aw-color-accent: #b5651d;
-	--aw-color-text: #1a1a1a;
-	--aw-color-text-muted: #4a4a4a;
-	--aw-color-bg: #ffffff;
-	--aw-color-bg-alt: #f7f9f8;
-	--aw-color-border: #d8e0df;
-	--aw-focus-ring: #0b6e6a;
+	--aw-color-bg: #fbf7f0;
+	--aw-color-bg-alt: #f3ece0;
+	--aw-color-primary: #3f5a4f;
+	--aw-color-primary-dark: #2e4339;
+	--aw-color-primary-tint: #e7ece7;
+	--aw-color-accent: #b5633f;
+	--aw-color-accent-tint: #f3e3da;
+	--aw-color-text: #2a2621;
+	--aw-color-text-muted: #675f54;
+	--aw-color-border: #e2d8c8;
+	--aw-focus-ring: #b5633f;
 
 	--aw-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-	--aw-font-heading: Georgia, "Times New Roman", serif;
+	--aw-font-heading: 'Fraunces', Georgia, "Times New Roman", serif;
 
 	--aw-font-size-base: 18px;
-	--aw-line-height: 1.6;
+	--aw-line-height: 1.65;
 	--aw-max-width: 1100px;
-	--aw-radius: 10px;
+	--aw-radius: 12px;
 }
 
 /* ---------- Reset & base ---------- */
@@ -53,13 +57,14 @@ select:focus-visible {
 
 h1, h2, h3, h4 {
 	font-family: var(--aw-font-heading);
-	line-height: 1.25;
+	font-weight: 600;
+	line-height: 1.2;
 	color: var(--aw-color-text);
 	margin: 0 0 0.6em;
 }
-h1 { font-size: clamp(2rem, 4vw, 2.75rem); }
-h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
-h3 { font-size: 1.25rem; }
+h1 { font-size: clamp(2.1rem, 4.2vw, 3rem); font-weight: 500; }
+h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); }
+h3 { font-size: 1.3rem; }
 p { margin: 0 0 1.2em; }
 
 /* ---------- Layout ---------- */
@@ -96,7 +101,7 @@ p { margin: 0 0 1.2em; }
 .aw-logo {
 	font-family: var(--aw-font-heading);
 	font-size: 1.4rem;
-	font-weight: 700;
+	font-weight: 600;
 	color: var(--aw-color-text);
 	text-decoration: none;
 }
@@ -110,10 +115,10 @@ p { margin: 0 0 1.2em; }
 	padding: 0;
 }
 .aw-primary-nav a {
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
 	padding: 10px 14px;
 	min-height: 44px;
-	line-height: 24px;
 	color: var(--aw-color-text);
 	text-decoration: none;
 	border-radius: 8px;
@@ -165,21 +170,42 @@ p { margin: 0 0 1.2em; }
 }
 .aw-social-links a:hover { background: var(--aw-color-primary); color: #fff; }
 
-/* ---------- Hero ---------- */
-.aw-hero { background: var(--aw-color-primary-tint); padding: 48px 0; }
-.aw-hero-inner { display: grid; gap: 32px; align-items: center; }
+/* ---------- Hero (with a real photo slot) ---------- */
+.aw-hero { background: var(--aw-color-primary-tint); padding: 56px 0; }
+.aw-hero-inner { display: grid; gap: 36px; align-items: center; }
 @media (min-width: 760px) {
-	.aw-hero-inner { grid-template-columns: 1.1fr 0.9fr; }
+	.aw-hero-inner { grid-template-columns: 1fr 0.85fr; }
 }
 .aw-hero h1 { margin-bottom: 0.4em; }
-.aw-hero .aw-lede { font-size: 1.15rem; color: var(--aw-color-text-muted); }
+.aw-hero .aw-lede { font-size: 1.2rem; color: var(--aw-color-text-muted); max-width: 46ch; }
+
+.aw-photo-slot {
+	aspect-ratio: 4 / 5;
+	border-radius: var(--aw-radius);
+	background: var(--aw-color-bg-alt);
+	border: 1.5px dashed var(--aw-color-border);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	color: var(--aw-color-text-muted);
+	font-size: 0.9rem;
+	padding: 20px;
+}
+.aw-photo-slot-wide { aspect-ratio: 16 / 10; }
+.aw-photo-slot-round {
+	aspect-ratio: 1 / 1;
+	border-radius: 50%;
+	width: 160px;
+	flex-shrink: 0;
+}
 
 .aw-btn {
 	display: inline-block;
 	padding: 14px 24px;
 	min-height: 44px;
 	border-radius: 8px;
-	background: var(--aw-color-primary);
+	background: var(--aw-color-accent);
 	color: #fff;
 	text-decoration: none;
 	font-weight: 600;
@@ -187,7 +213,7 @@ p { margin: 0 0 1.2em; }
 	cursor: pointer;
 	font-size: 1rem;
 }
-.aw-btn:hover { background: var(--aw-color-primary-dark); color: #fff; }
+.aw-btn:hover { background: #9c5436; color: #fff; }
 .aw-btn-outline {
 	background: transparent;
 	color: var(--aw-color-primary-dark);
@@ -195,20 +221,29 @@ p { margin: 0 0 1.2em; }
 }
 .aw-btn-outline:hover { background: var(--aw-color-primary-tint); }
 
-/* ---------- Path picker ---------- */
-.aw-path-picker { display: grid; gap: 20px; padding: 48px 0; }
-@media (min-width: 760px) {
-	.aw-path-picker-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+/* ---------- Path picker (restyled: a row, not identical cards) ---------- */
+.aw-path-picker { padding: 56px 0; }
+.aw-path-list {
+	list-style: none;
+	margin: 24px 0 0;
+	padding: 0;
+	display: grid;
+	gap: 0;
+	border-top: 1px solid var(--aw-color-border);
 }
-.aw-path-card {
-	border: 1px solid var(--aw-color-border);
-	border-radius: var(--aw-radius);
-	padding: 24px;
-	background: var(--aw-color-bg);
+.aw-path-list li {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	gap: 16px;
+	align-items: baseline;
+	padding: 20px 0;
+	border-bottom: 1px solid var(--aw-color-border);
 }
-.aw-path-card h3 { margin-bottom: 0.4em; }
+.aw-path-list h3 { margin: 0 0 4px; font-size: 1.15rem; }
+.aw-path-list p { margin: 0; color: var(--aw-color-text-muted); font-size: 0.95rem; }
+.aw-path-list a { white-space: nowrap; font-weight: 600; }
 
-/* ---------- Pillar grid / article cards ---------- */
+/* ---------- Section rhythm ---------- */
 .aw-section { padding: 48px 0; }
 .aw-section-alt { background: var(--aw-color-bg-alt); }
 .aw-section-head {
@@ -219,6 +254,41 @@ p { margin: 0 0 1.2em; }
 	gap: 12px;
 	margin-bottom: 24px;
 }
+
+/* ---------- Featured article (large, one post) ---------- */
+.aw-featured {
+	display: grid;
+	gap: 28px;
+	border: 1px solid var(--aw-color-border);
+	border-radius: var(--aw-radius);
+	overflow: hidden;
+	background: var(--aw-color-bg);
+}
+@media (min-width: 760px) {
+	.aw-featured { grid-template-columns: 1fr 1fr; align-items: stretch; }
+}
+.aw-featured-media { background: var(--aw-color-primary-tint); min-height: 220px; }
+.aw-featured-body { padding: 28px; display: flex; flex-direction: column; justify-content: center; }
+.aw-featured-body h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); }
+
+/* ---------- Latest articles: a single combined list, not a card grid ---------- */
+.aw-latest-list { list-style: none; margin: 0; padding: 0; }
+.aw-latest-list li {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	gap: 12px 20px;
+	align-items: baseline;
+	padding: 18px 0;
+	border-bottom: 1px solid var(--aw-color-border);
+}
+.aw-latest-list h3 { margin: 0 0 4px; font-size: 1.1rem; }
+.aw-latest-list h3 a { color: var(--aw-color-text); text-decoration: none; }
+.aw-latest-list h3 a:hover { color: var(--aw-color-primary-dark); }
+.aw-latest-list .aw-card-eyebrow { margin-bottom: 4px; }
+.aw-latest-list time { color: var(--aw-color-text-muted); font-size: 0.85rem; white-space: nowrap; }
+.aw-latest-excerpt { color: var(--aw-color-text-muted); font-size: 0.95rem; margin: 0; grid-column: 1 / -1; }
+
+/* Card (still used on pillar hub pages) */
 .aw-card-grid { display: grid; gap: 24px; grid-template-columns: 1fr; }
 @media (min-width: 640px) { .aw-card-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 980px) { .aw-card-grid { grid-template-columns: repeat(3, 1fr); } }
@@ -232,12 +302,11 @@ p { margin: 0 0 1.2em; }
 }
 .aw-card-body { padding: 18px; flex: 1; display: flex; flex-direction: column; }
 .aw-card-eyebrow {
-	font-size: 0.8rem;
+	font-size: 0.78rem;
 	font-weight: 700;
 	text-transform: uppercase;
-	letter-spacing: 0.04em;
-	color: var(--aw-color-primary-dark);
-	margin-bottom: 6px;
+	letter-spacing: 0.05em;
+	color: var(--aw-color-accent);
 }
 .aw-card h3 { margin-bottom: 8px; font-size: 1.15rem; }
 .aw-card h3 a { color: var(--aw-color-text); text-decoration: none; }
@@ -245,13 +314,56 @@ p { margin: 0 0 1.2em; }
 .aw-card-excerpt { color: var(--aw-color-text-muted); font-size: 0.95rem; }
 .aw-card-date { color: var(--aw-color-text-muted); font-size: 0.85rem; margin-top: auto; padding-top: 8px; }
 
-/* ---------- Testimonials ---------- */
-.aw-article-body blockquote {
-	border-left: 4px solid var(--aw-color-primary);
-	padding: 8px 0 8px 20px;
-	margin: 0 0 24px;
+/* ---------- Pull quote ---------- */
+.aw-pull-quote {
+	max-width: 70ch;
+	margin: 0 auto;
+	text-align: center;
+	padding: 8px 0;
 }
-.aw-article-body blockquote p { font-style: italic; }
+.aw-pull-quote blockquote {
+	margin: 0;
+	font-family: var(--aw-font-heading);
+	font-style: italic;
+	font-size: clamp(1.3rem, 2.6vw, 1.7rem);
+	color: var(--aw-color-text);
+	line-height: 1.45;
+}
+.aw-pull-quote cite {
+	display: block;
+	margin-top: 16px;
+	font-style: normal;
+	font-size: 0.95rem;
+	color: var(--aw-color-text-muted);
+}
+
+/* ---------- About strip (split photo + text) ---------- */
+.aw-about-strip {
+	display: grid;
+	gap: 28px;
+	align-items: center;
+}
+@media (min-width: 760px) {
+	.aw-about-strip { grid-template-columns: 0.4fr 0.6fr; }
+}
+.aw-about-strip h2 { margin-bottom: 0.3em; }
+
+/* ---------- Crisis block ---------- */
+.aw-crisis {
+	border: 1.5px solid var(--aw-color-accent);
+	background: var(--aw-color-accent-tint);
+	border-radius: var(--aw-radius);
+	padding: 24px 28px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16px;
+	align-items: center;
+	justify-content: space-between;
+}
+.aw-crisis p { margin: 0; }
+.aw-crisis strong { color: var(--aw-color-text); }
+.aw-crisis a.aw-btn { background: var(--aw-color-text); flex-shrink: 0; }
+.aw-crisis a.aw-btn:hover { background: #000; }
 
 /* ---------- Article ---------- */
 .aw-article-header { padding: 40px 0 0; }
@@ -263,6 +375,12 @@ p { margin: 0 0 1.2em; }
 .aw-article-meta .aw-credentials { color: var(--aw-color-primary-dark); font-weight: 600; }
 .aw-article-body { max-width: 72ch; }
 .aw-article-body img { border-radius: var(--aw-radius); }
+.aw-article-body blockquote {
+	border-left: 4px solid var(--aw-color-accent);
+	padding: 8px 0 8px 20px;
+	margin: 0 0 24px;
+}
+.aw-article-body blockquote p { font-style: italic; }
 
 /* Author box */
 .aw-author-box {
@@ -314,10 +432,12 @@ p { margin: 0 0 1.2em; }
 	border-radius: 8px;
 	font-family: inherit;
 	min-height: 44px;
+	background: var(--aw-color-bg);
+	color: var(--aw-color-text);
 }
 .aw-form textarea { min-height: 140px; }
 .aw-form-notice { padding: 14px 18px; border-radius: 8px; margin-bottom: 20px; }
-.aw-form-notice-success { background: #e6f3e9; color: #1d5c2e; }
+.aw-form-notice-success { background: #e4ede4; color: #1d4a2e; }
 
 /* ---------- Newsletter ---------- */
 .aw-newsletter {
@@ -372,13 +492,13 @@ p { margin: 0 0 1.2em; }
 	white-space: nowrap;
 }
 
-/* Preview-build banner, shown only on this static demo so nobody mistakes
-   it for the production WordPress site. */
+/* Internal-only preview banner (gated by isPreview in BaseLayout — never
+   shows once PUBLIC_SITE_STAGE=production is set) */
 .aw-preview-banner {
-	background: var(--aw-color-accent);
+	background: var(--aw-color-text);
 	color: #fff;
 	text-align: center;
 	padding: 8px 16px;
-	font-size: 0.85rem;
+	font-size: 0.8rem;
 }
-.aw-preview-banner a { color: #fff; text-decoration: underline; }
+.aw-preview-banner a { color: #fff; }

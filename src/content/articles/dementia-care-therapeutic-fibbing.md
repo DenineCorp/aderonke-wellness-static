@@ -2,8 +2,8 @@
 title: "Therapeutic Fibbing: When (and Why) It's OK to Not Correct a Loved One with Dementia"
 description: "Correcting a loved one with dementia can cause real distress for no benefit. Here's what \"therapeutic fibbing\" is, when it helps, and gentler alternatives to try first."
 pillar: "dementia-care"
-pubDate: 2026-11-03
-updatedDate: 2026-11-03
+pubDate: 2026-09-29
+updatedDate: 2026-09-29
 author: "Aderonke Agboji"
 credentials: "RN, PhD Candidate"
 ---

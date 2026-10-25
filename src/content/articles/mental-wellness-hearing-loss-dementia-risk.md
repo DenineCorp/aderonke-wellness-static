@@ -2,8 +2,8 @@
 title: "Can Hearing Loss Increase Dementia Risk? What the Research Says"
 description: "Hearing loss is one of the most significant modifiable risk factors for dementia identified by The Lancet Commission. Here's what the research actually shows about hearing aids and risk reduction."
 pillar: "mental-wellness"
-pubDate: 2026-11-19
-updatedDate: 2026-11-19
+pubDate: 2026-10-20
+updatedDate: 2026-10-20
 author: "Aderonke Agboji"
 credentials: "RN, PhD Candidate"
 ---

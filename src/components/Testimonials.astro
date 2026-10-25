@@ -1,0 +1,30 @@
+---
+/**
+ * Renders nothing when empty — never shows a placeholder or invented
+ * quote. Drop real, verified testimonials into this array (or wire it
+ * to a CMS field later) once they exist.
+ */
+interface Testimonial {
+	quote: string;
+	name: string;
+	role: string;
+}
+
+const testimonials: Testimonial[] = [];
+---
+
+{testimonials.length > 0 && (
+	<section class="aw-container aw-section">
+		<h2>What readers say</h2>
+		<div class="aw-card-grid">
+			{testimonials.map((t) => (
+				<blockquote class="aw-card">
+					<div class="aw-card-body">
+						<p>&ldquo;{t.quote}&rdquo;</p>
+						<cite>— {t.name}, {t.role}</cite>
+					</div>
+				</blockquote>
+			))}
+		</div>
+	</section>
+)}

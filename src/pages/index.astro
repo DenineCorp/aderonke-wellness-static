@@ -1,119 +1,129 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ArticleCard from '../components/ArticleCard.astro';
-import { getCollection } from 'astro:content';
+import FeaturedArticle from '../components/FeaturedArticle.astro';
+import PullQuote from '../components/PullQuote.astro';
+import AboutStrip from '../components/AboutStrip.astro';
+import Newsletter from '../components/Newsletter.astro';
+import CrisisBlock from '../components/CrisisBlock.astro';
+import Testimonials from '../components/Testimonials.astro';
+import { getPublishedArticles } from '../lib/site';
 
-const allArticles = (await getCollection('articles')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+const published = await getPublishedArticles();
+const [featured, ...rest] = published;
+const latest = rest.slice(0, 6);
 
-const pillars = [
-	{ slug: 'mental-wellness', label: 'Mental Wellness' },
-	{ slug: 'dementia-care', label: 'Dementia & Cognitive Care' },
-	{ slug: 'caregiver-support', label: 'Caregiver Support' },
-] as const;
-
-const kitFormId = import.meta.env.PUBLIC_KIT_FORM_ID || '';
+const pillarLabels: Record<string, string> = {
+	'mental-wellness': 'Mental Wellness',
+	'dementia-care': 'Dementia & Cognitive Care',
+	'caregiver-support': 'Caregiver Support',
+};
 
 const jsonLd = {
 	'@context': 'https://schema.org',
 	'@type': 'WebSite',
 	name: 'Aderonke Wellness',
-	url: Astro.site ?? 'https://aderonkeagboji.netlify.app',
+	url: Astro.site ?? 'https://aderonkewellness.netlify.app',
 };
 ---
 
 <BaseLayout
 	title="Mental Wellness, Dementia Care & Caregiver Support"
-	description="Nursing-backed guidance on mental wellness, dementia care, and caregiving for seniors and the families who support them."
+	description="Nursing-informed guidance on mental wellness, dementia care, and caregiving for seniors and the families who support them."
 	jsonLd={jsonLd}
 >
+	<!-- 1. Hero -->
 	<section class="aw-hero">
 		<div class="aw-container aw-hero-inner">
 			<div>
-				<h1>Aderonke Wellness</h1>
+				<h1>Steady, honest guidance for the hardest parts of caregiving</h1>
 				<p class="aw-lede">
-					Nursing-backed guidance on mental wellness, dementia care, and caregiving for seniors and the families who support them.
+					Nursing-informed articles on mental wellness, dementia care, and caregiving — written for seniors, families, and care staff.
 				</p>
 				<p>
 					<a class="aw-btn" href="/mental-wellness/">Start reading</a>
-					<a class="aw-btn aw-btn-outline" href="/about/">About Aderonke</a>
 				</p>
+			</div>
+			<div class="aw-photo-slot" aria-hidden="true">
+				Photo placeholder — Aderonke's photo goes here
 			</div>
 		</div>
 	</section>
 
+	<!-- 2. Who are you here for? -->
 	<section class="aw-container aw-path-picker">
 		<h2>Who are you here for?</h2>
-		<div class="aw-path-picker-grid">
-			<div class="aw-path-card">
-				<h3>Seniors</h3>
-				<p>Plain-language articles on mood, memory, and staying connected.</p>
-				<a href="/mental-wellness/">Read Mental Wellness articles</a>
-			</div>
-			<div class="aw-path-card">
-				<h3>Family Caregivers</h3>
-				<p>Practical support for the day-to-day of caring for an aging loved one.</p>
-				<a href="/caregiver-support/">Read Caregiver Support articles</a>
-			</div>
-			<div class="aw-path-card">
-				<h3>Facility & Care Staff</h3>
-				<p>Dementia and cognitive-care guidance grounded in Aderonke's long-term care background.</p>
-				<a href="/dementia-care/">Read Dementia & Cognitive Care articles</a>
-			</div>
-		</div>
+		<ul class="aw-path-list">
+			<li>
+				<div>
+					<h3>Seniors</h3>
+					<p>Plain-language articles on mood, memory, and staying connected.</p>
+				</div>
+				<a href="/mental-wellness/">Mental Wellness →</a>
+			</li>
+			<li>
+				<div>
+					<h3>Family Caregivers</h3>
+					<p>Practical support for the day-to-day of caring for an aging loved one.</p>
+				</div>
+				<a href="/caregiver-support/">Caregiver Support →</a>
+			</li>
+			<li>
+				<div>
+					<h3>Facility &amp; Care Staff</h3>
+					<p>Dementia and cognitive-care guidance grounded in Aderonke's long-term care background.</p>
+				</div>
+				<a href="/dementia-care/">Dementia &amp; Cognitive Care →</a>
+			</li>
+		</ul>
 	</section>
 
-	{pillars.map((pillar) => {
-		const pillarArticles = allArticles.filter((a) => a.data.pillar === pillar.slug).slice(0, 3);
-		if (pillarArticles.length === 0) return null;
-		return (
-			<section class="aw-container aw-section">
-				<div class="aw-section-head">
-					<h2>{pillar.label}</h2>
-					<a href={`/${pillar.slug}/`}>View all {pillar.label} articles</a>
-				</div>
-				<div class="aw-card-grid">
-					{pillarArticles.map((article) => <ArticleCard article={article} />)}
-				</div>
-			</section>
-		);
-	})}
+	<!-- 3. Featured article -->
+	{featured && (
+		<section class="aw-container aw-section">
+			<FeaturedArticle article={featured} />
+		</section>
+	)}
 
-	<section class="aw-container aw-section aw-section-alt">
-		<div class="aw-article-body" style="max-width: none;">
-			<h2>Mission Statement</h2>
-			<p>At aderonkeagboji.com, my mission is to foster a nurturing and supportive environment for seniors, aiming to enhance their mental wellness and overall quality of life. Recognizing the unique mental health challenges faced by older individuals, especially those in long-term care facilities or living independently, this platform endeavors to provide insightful information, actionable resources, and a compassionate community.</p>
-			<p>I am committed to:</p>
-			<ul>
-				<li><strong>Educating and Empowering:</strong> Providing seniors, caregivers, and families with knowledge and resources to better understand and address mental health challenges faced by older individuals.</li>
-				<li><strong>Community Building:</strong> Creating a safe and supportive space where individuals can share experiences, seek advice, and find camaraderie.</li>
-				<li><strong>Advocacy:</strong> Raising awareness about senior mental health, and advocating for a societal mindset that values and supports the mental wellness of our older generation.</li>
-				<li><strong>Innovation and Engagement:</strong> Exploring the intersection of technology and mental health to propose innovative solutions.</li>
-				<li><strong>Collaboration:</strong> Working alongside mental health professionals, caregivers, and relevant organizations to develop and share resources.</li>
+	<!-- Pull quote, drawn from Aderonke's own About page copy -->
+	<PullQuote
+		quote="Having dedicated 20 years to long-term care, I've witnessed firsthand the transformative power of compassionate care intertwined with informed practice."
+		attribution="Aderonke Agboji, RN, PhD Candidate"
+	/>
+
+	<!-- 4. Latest articles: one combined list -->
+	{latest.length > 0 && (
+		<section class="aw-container aw-section aw-section-alt">
+			<div class="aw-section-head">
+				<h2>Latest articles</h2>
+			</div>
+			<ul class="aw-latest-list">
+				{latest.map((article) => (
+					<li>
+						<div>
+							<p class="aw-card-eyebrow">{pillarLabels[article.data.pillar]}</p>
+							<h3><a href={`/${article.data.pillar}/${article.id}/`}>{article.data.title}</a></h3>
+						</div>
+						<time datetime={article.data.pubDate.toISOString()}>
+							{article.data.pubDate.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' })}
+						</time>
+						<p class="aw-latest-excerpt">{article.data.description}</p>
+					</li>
+				))}
 			</ul>
-			<h2>Testimonials</h2>
-			<blockquote><p>&ldquo;I stumbled upon aderonkeagboji.com during a challenging time as my father transitioned into a long-term care facility. The resources and blog posts on this website have been a beacon of hope.&rdquo;<br />&mdash; Sarah M., caregiver</p></blockquote>
-			<blockquote><p>&ldquo;The community here is amazing! I&rsquo;ve learned so much from the shared experiences of others and the insightful blog posts.&rdquo;<br />&mdash; James K., senior</p></blockquote>
-			<blockquote><p>&ldquo;The articles on aderonkeagboji.com are not only informative but also very empathetic. They address real concerns and provide actionable solutions.&rdquo;<br />&mdash; Mark T., son and caregiver</p></blockquote>
-		</div>
+		</section>
+	)}
+
+	<!-- Testimonials: renders nothing until real quotes exist -->
+	<Testimonials />
+
+	<!-- 5. About strip -->
+	<AboutStrip />
+
+	<!-- 6. Newsletter: only renders a real form once Kit is connected -->
+	<section class="aw-container aw-section">
+		<Newsletter />
 	</section>
 
-	<section class="aw-container aw-section">
-		<div class="aw-newsletter">
-			<h2>Get new articles by email</h2>
-			<p>No spam, unsubscribe anytime. We'll never share your email.</p>
-			{kitFormId ? (
-				<form method="post" action={`https://app.convertkit.com/forms/${kitFormId}/subscriptions`}>
-					<label for="email_address" class="screen-reader-text">Email address</label>
-					<input type="email" id="email_address" name="email_address" required placeholder="you@example.com" />
-					<button type="submit" class="aw-btn">Subscribe</button>
-				</form>
-			) : (
-				<p style="font-size: 0.9rem; opacity: 0.9;">
-					(Newsletter signup goes live once this preview is connected to a Kit account — set the <code>PUBLIC_KIT_FORM_ID</code> environment variable in Netlify.)
-				</p>
-			)}
-		</div>
-	</section>
+	<!-- 7. Crisis support -->
+	<CrisisBlock />
 </BaseLayout>

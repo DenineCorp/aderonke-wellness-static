@@ -2,10 +2,14 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import AuthorBox from '../../components/AuthorBox.astro';
 import Disclaimer from '../../components/Disclaimer.astro';
-import { getCollection, render } from 'astro:content';
+import { render } from 'astro:content';
+import { getPublishedArticles } from '../../lib/site';
 
 export async function getStaticPaths() {
-	const articles = await getCollection('articles');
+	// Only articles whose pubDate has arrived get a page at all — a
+	// future-dated article simply doesn't exist yet on a static site,
+	// the same way an unscheduled WordPress post returns a 404.
+	const articles = await getPublishedArticles();
 	return articles.map((article) => ({
 		params: { pillar: article.data.pillar, slug: article.id },
 		props: { article },
@@ -21,7 +25,7 @@ const pillarLabels: Record<string, string> = {
 	'caregiver-support': 'Caregiver Support',
 };
 
-const formattedDate = article.data.updatedDate.toLocaleDateString('en-US', {
+const formattedDate = article.data.updatedDate.toLocaleDateString('en-CA', {
 	year: 'numeric',
 	month: 'long',
 	day: 'numeric',
