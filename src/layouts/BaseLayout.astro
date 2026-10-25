@@ -1,0 +1,37 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description: string;
+	jsonLd?: Record<string, unknown>;
+}
+const { title, description, jsonLd } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>{title} — Aderonke Wellness</title>
+	<meta name="description" content={description} />
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+	{jsonLd && (
+		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+	)}
+</head>
+<body>
+	<div class="aw-preview-banner">
+		Static preview build for Netlify — a parallel version of the WordPress site, built from the same content.
+	</div>
+	<Header currentPath={currentPath} />
+	<main id="aw-main">
+		<slot />
+	</main>
+	<Footer />
+</body>
+</html>

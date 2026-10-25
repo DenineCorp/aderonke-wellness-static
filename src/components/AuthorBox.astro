@@ -1,0 +1,17 @@
+---
+interface Props {
+	author: string;
+	credentials: string;
+}
+const { author, credentials } = Astro.props;
+const initials = author.split(' ').map((n) => n[0]).join('');
+---
+
+<div class="aw-author-box">
+	<div class="aw-author-avatar" aria-hidden="true">{initials}</div>
+	<div>
+		<h4>{author}, <span class="aw-credentials">{credentials}</span></h4>
+		<p>Nurse with 20 years in long-term care, currently pursuing a PhD in Health Sciences specializing in apathy in dementia care.</p>
+		<p><a href="/about/">More about the author</a></p>
+	</div>
+</div>

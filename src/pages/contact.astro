@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="Contact Us"
+	description="Get in touch with Aderonke Wellness — questions, feedback, or your own story."
+>
+	<div class="aw-container aw-section">
+		<h1>Contact Us</h1>
+		<div class="aw-article-body">
+			<p>Your feedback, questions, and stories are vital to us. Whether you wish to know more about a topic, share a personal experience, or provide feedback on our content, we're here to listen.</p>
+		</div>
+
+		<!--
+			Netlify Forms: no backend code needed. Netlify's build step scans
+			the deployed HTML for a <form data-netlify="true"> and
+			auto-registers it; submissions show up in the Netlify dashboard
+			(and can be forwarded to email from there). netlify-honeypot
+			catches simple bots. This replaces the PHP admin-post.php
+			handler the WordPress version uses, since there's no PHP here.
+		-->
+		<form
+			class="aw-form"
+			name="contact"
+			method="POST"
+			data-netlify="true"
+			netlify-honeypot="aw-website"
+		>
+			<input type="hidden" name="form-name" value="contact" />
+			<p style="position: absolute; left: -9999px;">
+				<label>Leave this field empty: <input name="aw-website" /></label>
+			</p>
+
+			<div class="aw-field">
+				<label for="name">Name</label>
+				<input type="text" id="name" name="name" required />
+			</div>
+
+			<div class="aw-field">
+				<label for="email">Email</label>
+				<input type="email" id="email" name="email" required />
+			</div>
+
+			<div class="aw-field">
+				<label for="message">Message</label>
+				<textarea id="message" name="message" required></textarea>
+			</div>
+
+			<button type="submit" class="aw-btn">Send message</button>
+		</form>
+	</div>
+</BaseLayout>

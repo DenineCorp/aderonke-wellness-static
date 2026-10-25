@@ -1,0 +1,17 @@
+import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
+
+const articles = defineCollection({
+	loader: glob({ pattern: '**/*.md', base: './src/content/articles' }),
+	schema: z.object({
+		title: z.string(),
+		description: z.string(),
+		pillar: z.enum(['mental-wellness', 'dementia-care', 'caregiver-support']),
+		pubDate: z.coerce.date(),
+		updatedDate: z.coerce.date(),
+		author: z.string(),
+		credentials: z.string(),
+	}),
+});
+
+export const collections = { articles };

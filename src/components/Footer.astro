@@ -1,0 +1,29 @@
+---
+const footerLinks = [
+	{ href: '/privacy-policy/', label: 'Privacy Policy' },
+	{ href: '/disclaimer/', label: 'Disclaimer' },
+	{ href: '/editorial-policy/', label: 'Editorial Policy' },
+	{ href: '/resources/', label: 'Resources' },
+];
+const year = new Date().getFullYear();
+---
+
+<footer class="aw-site-footer">
+	<div class="aw-container aw-footer-inner">
+		<nav class="aw-footer-nav" aria-label="Footer">
+			<ul>
+				{footerLinks.map((item) => (
+					<li><a href={item.href}>{item.label}</a></li>
+				))}
+			</ul>
+		</nav>
+
+		<!-- Social icons intentionally omitted: no real profile URLs are
+		     configured yet. Same "hide, don't link to #" rule as the
+		     WordPress build — see inc/template-helpers.php there. -->
+
+		<p class="aw-footer-copy">
+			&copy; {year} Aderonke Wellness. All content is for informational purposes only and is not medical advice.
+		</p>
+	</div>
+</footer>

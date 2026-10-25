@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+import Disclaimer from '../../components/Disclaimer.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+	const articles = await getCollection('articles');
+	return articles.map((article) => ({
+		params: { pillar: article.data.pillar, slug: article.id },
+		props: { article },
+	}));
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+
+const pillarLabels: Record<string, string> = {
+	'mental-wellness': 'Mental Wellness',
+	'dementia-care': 'Dementia & Cognitive Care',
+	'caregiver-support': 'Caregiver Support',
+};
+
+const formattedDate = article.data.updatedDate.toLocaleDateString('en-US', {
+	year: 'numeric',
+	month: 'long',
+	day: 'numeric',
+});
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'Article',
+	headline: article.data.title,
+	datePublished: article.data.pubDate.toISOString(),
+	dateModified: article.data.updatedDate.toISOString(),
+	author: {
+		'@type': 'Person',
+		name: `${article.data.author}, ${article.data.credentials}`,
+	},
+	publisher: {
+		'@type': 'Organization',
+		name: 'Aderonke Wellness',
+	},
+};
+---
+
+<BaseLayout title={article.data.title} description={article.data.description} jsonLd={jsonLd}>
+	<header class="aw-article-header">
+		<div class="aw-container">
+			<p class="aw-card-eyebrow">{pillarLabels[article.data.pillar]}</p>
+			<h1>{article.data.title}</h1>
+			<p class="aw-article-meta">
+				By {article.data.author}, <span class="aw-credentials">{article.data.credentials}</span>{' '}
+				&mdash; last updated {formattedDate}
+			</p>
+		</div>
+	</header>
+
+	<div class="aw-container">
+		<div class="aw-article-body">
+			<Content />
+		</div>
+
+		<Disclaimer />
+		<AuthorBox author={article.data.author} credentials={article.data.credentials} />
+	</div>
+</BaseLayout>

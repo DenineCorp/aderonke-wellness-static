@@ -1,0 +1,48 @@
+---
+interface Props {
+	currentPath: string;
+}
+const { currentPath } = Astro.props;
+
+const navItems = [
+	{ href: '/', label: 'Home' },
+	{ href: '/mental-wellness/', label: 'Mental Wellness' },
+	{ href: '/dementia-care/', label: 'Dementia & Cognitive Care' },
+	{ href: '/caregiver-support/', label: 'Caregiver Support' },
+	{ href: '/about/', label: 'About Me' },
+	{ href: '/contact/', label: 'Contact' },
+];
+---
+
+<a class="aw-skip-link" href="#aw-main">Skip to content</a>
+
+<header class="aw-site-header">
+	<div class="aw-header-inner">
+		<a class="aw-logo" href="/">Aderonke Wellness</a>
+
+		<button class="aw-nav-toggle" id="aw-nav-toggle" aria-expanded="false" aria-controls="aw-primary-menu">
+			Menu
+		</button>
+
+		<nav class="aw-primary-nav" id="aw-primary-menu" aria-label="Primary">
+			<ul>
+				{navItems.map((item) => (
+					<li>
+						<a href={item.href} aria-current={currentPath === item.href ? 'page' : undefined}>
+							{item.label}
+						</a>
+					</li>
+				))}
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<script>
+	const toggle = document.getElementById('aw-nav-toggle');
+	const nav = document.getElementById('aw-primary-menu');
+	toggle?.addEventListener('click', () => {
+		const isOpen = nav?.classList.toggle('is-open');
+		toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+	});
+</script>

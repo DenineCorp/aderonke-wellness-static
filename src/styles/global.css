@@ -1,0 +1,384 @@
+/*
+Same design system as the WordPress build (wp-content/themes/aderonke-wellness/style.css
+in the sibling ADERONKE project) — same tokens, same class names, so the
+two versions of the site look identical even though they're built very
+differently under the hood.
+*/
+
+/* ---------- Design tokens ---------- */
+:root {
+	--aw-color-primary: #0b6e6a;
+	--aw-color-primary-dark: #084f4c;
+	--aw-color-primary-tint: #e6f3f2;
+	--aw-color-accent: #b5651d;
+	--aw-color-text: #1a1a1a;
+	--aw-color-text-muted: #4a4a4a;
+	--aw-color-bg: #ffffff;
+	--aw-color-bg-alt: #f7f9f8;
+	--aw-color-border: #d8e0df;
+	--aw-focus-ring: #0b6e6a;
+
+	--aw-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	--aw-font-heading: Georgia, "Times New Roman", serif;
+
+	--aw-font-size-base: 18px;
+	--aw-line-height: 1.6;
+	--aw-max-width: 1100px;
+	--aw-radius: 10px;
+}
+
+/* ---------- Reset & base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+	margin: 0;
+	font-family: var(--aw-font-body);
+	font-size: var(--aw-font-size-base);
+	line-height: var(--aw-line-height);
+	color: var(--aw-color-text);
+	background: var(--aw-color-bg);
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--aw-color-primary-dark); text-decoration-thickness: 2px; }
+a:hover { color: var(--aw-color-primary); }
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+	outline: 3px solid var(--aw-focus-ring);
+	outline-offset: 2px;
+}
+
+h1, h2, h3, h4 {
+	font-family: var(--aw-font-heading);
+	line-height: 1.25;
+	color: var(--aw-color-text);
+	margin: 0 0 0.6em;
+}
+h1 { font-size: clamp(2rem, 4vw, 2.75rem); }
+h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+h3 { font-size: 1.25rem; }
+p { margin: 0 0 1.2em; }
+
+/* ---------- Layout ---------- */
+.aw-container {
+	max-width: var(--aw-max-width);
+	margin: 0 auto;
+	padding: 0 24px;
+}
+.aw-skip-link {
+	position: absolute;
+	left: -9999px;
+	top: 0;
+	background: var(--aw-color-primary-dark);
+	color: #fff;
+	padding: 12px 20px;
+	z-index: 1000;
+	border-radius: 0 0 8px 0;
+}
+.aw-skip-link:focus { left: 0; }
+
+/* ---------- Header ---------- */
+.aw-site-header {
+	border-bottom: 1px solid var(--aw-color-border);
+	background: var(--aw-color-bg);
+}
+.aw-header-inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 24px;
+	padding: 16px 24px;
+	flex-wrap: wrap;
+}
+.aw-logo {
+	font-family: var(--aw-font-heading);
+	font-size: 1.4rem;
+	font-weight: 700;
+	color: var(--aw-color-text);
+	text-decoration: none;
+}
+
+.aw-primary-nav ul {
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+	margin: 0;
+	padding: 0;
+}
+.aw-primary-nav a {
+	display: inline-block;
+	padding: 10px 14px;
+	min-height: 44px;
+	line-height: 24px;
+	color: var(--aw-color-text);
+	text-decoration: none;
+	border-radius: 8px;
+}
+.aw-primary-nav a:hover,
+.aw-primary-nav a[aria-current="page"] {
+	background: var(--aw-color-primary-tint);
+	color: var(--aw-color-primary-dark);
+}
+
+.aw-nav-toggle {
+	display: none;
+	min-width: 44px;
+	min-height: 44px;
+	border: 1px solid var(--aw-color-border);
+	background: var(--aw-color-bg);
+	border-radius: 8px;
+	font-size: 1rem;
+	cursor: pointer;
+}
+
+@media (max-width: 760px) {
+	.aw-nav-toggle { display: inline-block; }
+	.aw-primary-nav { width: 100%; display: none; }
+	.aw-primary-nav.is-open { display: block; }
+	.aw-primary-nav ul { flex-direction: column; }
+}
+
+/* ---------- Social icons ---------- */
+.aw-social-links {
+	display: flex;
+	gap: 12px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.aw-social-links a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	background: var(--aw-color-primary-tint);
+	color: var(--aw-color-primary-dark);
+	text-decoration: none;
+	font-size: 0.85rem;
+	font-weight: 700;
+}
+.aw-social-links a:hover { background: var(--aw-color-primary); color: #fff; }
+
+/* ---------- Hero ---------- */
+.aw-hero { background: var(--aw-color-primary-tint); padding: 48px 0; }
+.aw-hero-inner { display: grid; gap: 32px; align-items: center; }
+@media (min-width: 760px) {
+	.aw-hero-inner { grid-template-columns: 1.1fr 0.9fr; }
+}
+.aw-hero h1 { margin-bottom: 0.4em; }
+.aw-hero .aw-lede { font-size: 1.15rem; color: var(--aw-color-text-muted); }
+
+.aw-btn {
+	display: inline-block;
+	padding: 14px 24px;
+	min-height: 44px;
+	border-radius: 8px;
+	background: var(--aw-color-primary);
+	color: #fff;
+	text-decoration: none;
+	font-weight: 600;
+	border: none;
+	cursor: pointer;
+	font-size: 1rem;
+}
+.aw-btn:hover { background: var(--aw-color-primary-dark); color: #fff; }
+.aw-btn-outline {
+	background: transparent;
+	color: var(--aw-color-primary-dark);
+	border: 2px solid var(--aw-color-primary);
+}
+.aw-btn-outline:hover { background: var(--aw-color-primary-tint); }
+
+/* ---------- Path picker ---------- */
+.aw-path-picker { display: grid; gap: 20px; padding: 48px 0; }
+@media (min-width: 760px) {
+	.aw-path-picker-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+}
+.aw-path-card {
+	border: 1px solid var(--aw-color-border);
+	border-radius: var(--aw-radius);
+	padding: 24px;
+	background: var(--aw-color-bg);
+}
+.aw-path-card h3 { margin-bottom: 0.4em; }
+
+/* ---------- Pillar grid / article cards ---------- */
+.aw-section { padding: 48px 0; }
+.aw-section-alt { background: var(--aw-color-bg-alt); }
+.aw-section-head {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin-bottom: 24px;
+}
+.aw-card-grid { display: grid; gap: 24px; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .aw-card-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 980px) { .aw-card-grid { grid-template-columns: repeat(3, 1fr); } }
+.aw-card {
+	border: 1px solid var(--aw-color-border);
+	border-radius: var(--aw-radius);
+	overflow: hidden;
+	background: var(--aw-color-bg);
+	display: flex;
+	flex-direction: column;
+}
+.aw-card-body { padding: 18px; flex: 1; display: flex; flex-direction: column; }
+.aw-card-eyebrow {
+	font-size: 0.8rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	color: var(--aw-color-primary-dark);
+	margin-bottom: 6px;
+}
+.aw-card h3 { margin-bottom: 8px; font-size: 1.15rem; }
+.aw-card h3 a { color: var(--aw-color-text); text-decoration: none; }
+.aw-card h3 a:hover { color: var(--aw-color-primary-dark); }
+.aw-card-excerpt { color: var(--aw-color-text-muted); font-size: 0.95rem; }
+.aw-card-date { color: var(--aw-color-text-muted); font-size: 0.85rem; margin-top: auto; padding-top: 8px; }
+
+/* ---------- Testimonials ---------- */
+.aw-article-body blockquote {
+	border-left: 4px solid var(--aw-color-primary);
+	padding: 8px 0 8px 20px;
+	margin: 0 0 24px;
+}
+.aw-article-body blockquote p { font-style: italic; }
+
+/* ---------- Article ---------- */
+.aw-article-header { padding: 40px 0 0; }
+.aw-article-meta {
+	color: var(--aw-color-text-muted);
+	font-size: 0.95rem;
+	margin-bottom: 1.5em;
+}
+.aw-article-meta .aw-credentials { color: var(--aw-color-primary-dark); font-weight: 600; }
+.aw-article-body { max-width: 72ch; }
+.aw-article-body img { border-radius: var(--aw-radius); }
+
+/* Author box */
+.aw-author-box {
+	display: flex;
+	gap: 16px;
+	align-items: flex-start;
+	border: 1px solid var(--aw-color-border);
+	border-radius: var(--aw-radius);
+	padding: 20px;
+	margin: 40px 0;
+	background: var(--aw-color-bg-alt);
+}
+.aw-author-box .aw-author-avatar {
+	border-radius: 50%;
+	width: 64px;
+	height: 64px;
+	flex-shrink: 0;
+	background: var(--aw-color-primary);
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 700;
+	font-size: 1.3rem;
+}
+.aw-author-box h4 { margin-bottom: 4px; }
+
+/* Medical disclaimer */
+.aw-disclaimer {
+	border: 1px solid var(--aw-color-border);
+	border-radius: var(--aw-radius);
+	padding: 16px 20px;
+	font-size: 0.9rem;
+	color: var(--aw-color-text-muted);
+	background: var(--aw-color-bg-alt);
+	margin: 32px 0;
+}
+
+/* ---------- Forms ---------- */
+.aw-form .aw-field { margin-bottom: 20px; }
+.aw-form label { display: block; font-weight: 600; margin-bottom: 6px; }
+.aw-form input[type="text"],
+.aw-form input[type="email"],
+.aw-form textarea {
+	width: 100%;
+	padding: 12px 14px;
+	font-size: 1rem;
+	border: 1px solid var(--aw-color-border);
+	border-radius: 8px;
+	font-family: inherit;
+	min-height: 44px;
+}
+.aw-form textarea { min-height: 140px; }
+.aw-form-notice { padding: 14px 18px; border-radius: 8px; margin-bottom: 20px; }
+.aw-form-notice-success { background: #e6f3e9; color: #1d5c2e; }
+
+/* ---------- Newsletter ---------- */
+.aw-newsletter {
+	background: var(--aw-color-primary);
+	color: #fff;
+	border-radius: var(--aw-radius);
+	padding: 32px;
+	text-align: center;
+}
+.aw-newsletter h2 { color: #fff; }
+.aw-newsletter form {
+	display: flex;
+	gap: 10px;
+	max-width: 420px;
+	margin: 20px auto 0;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+.aw-newsletter input[type="email"] {
+	flex: 1;
+	min-width: 220px;
+	padding: 12px 14px;
+	border-radius: 8px;
+	border: none;
+	font-size: 1rem;
+}
+
+/* ---------- Footer ---------- */
+.aw-site-footer {
+	border-top: 1px solid var(--aw-color-border);
+	background: var(--aw-color-bg-alt);
+	padding: 40px 0;
+	margin-top: 48px;
+}
+.aw-footer-inner {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 24px;
+	justify-content: space-between;
+	align-items: center;
+}
+.aw-footer-nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 16px; margin: 0; padding: 0; }
+.aw-footer-nav a { color: var(--aw-color-text-muted); text-decoration: none; }
+.aw-footer-nav a:hover { color: var(--aw-color-primary-dark); }
+.aw-footer-copy { color: var(--aw-color-text-muted); font-size: 0.9rem; }
+
+.screen-reader-text {
+	position: absolute !important;
+	width: 1px; height: 1px;
+	overflow: hidden;
+	clip: rect(1px, 1px, 1px, 1px);
+	white-space: nowrap;
+}
+
+/* Preview-build banner, shown only on this static demo so nobody mistakes
+   it for the production WordPress site. */
+.aw-preview-banner {
+	background: var(--aw-color-accent);
+	color: #fff;
+	text-align: center;
+	padding: 8px 16px;
+	font-size: 0.85rem;
+}
+.aw-preview-banner a { color: #fff; text-decoration: underline; }

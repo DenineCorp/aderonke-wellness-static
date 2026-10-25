@@ -1,0 +1,30 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+	article: CollectionEntry<'articles'>;
+}
+const { article } = Astro.props;
+
+const pillarLabels: Record<string, string> = {
+	'mental-wellness': 'Mental Wellness',
+	'dementia-care': 'Dementia & Cognitive Care',
+	'caregiver-support': 'Caregiver Support',
+};
+
+const href = `/${article.data.pillar}/${article.id}/`;
+const formattedDate = article.data.pubDate.toLocaleDateString('en-US', {
+	year: 'numeric',
+	month: 'long',
+	day: 'numeric',
+});
+---
+
+<article class="aw-card">
+	<div class="aw-card-body">
+		<p class="aw-card-eyebrow">{pillarLabels[article.data.pillar]}</p>
+		<h3><a href={href}>{article.data.title}</a></h3>
+		<p class="aw-card-excerpt">{article.data.description}</p>
+		<p class="aw-card-date">{formattedDate}</p>
+	</div>
+</article>

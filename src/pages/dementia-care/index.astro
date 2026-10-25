@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+
+const articles = (await getCollection('articles', (a) => a.data.pillar === 'dementia-care')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BaseLayout
+	title="Dementia & Cognitive Care"
+	description="Plain-language explanations of dementia symptoms and stages, with practical guidance for caregivers and care staff."
+>
+	<header class="aw-container aw-section">
+		<h1>Dementia & Cognitive Care</h1>
+		<div class="aw-article-body">
+			<p>Dementia changes more than memory — it changes motivation, mood, communication, and daily routines, for the person living with it and for everyone around them. Families and care staff are often prepared for the memory loss, but not for symptoms like apathy, agitation, or the difficult conversations that come with a progressing diagnosis.</p>
+			<p>This section draws on Aderonke's 20 years in long-term care and her ongoing PhD research on apathy in dementia care. You'll find plain-language explanations of symptoms and stages, practical guidance for caregivers and care staff, and honest answers to the questions families ask most.</p>
+			<p>Every article here is written or reviewed by Aderonke Agboji, RN, PhD Candidate in Health Sciences (Dementia Studies), and sourced to recognized health authorities. See our <a href="/editorial-policy/">Editorial Policy</a> for how we research and review.</p>
+		</div>
+	</header>
+
+	<div class="aw-container aw-section">
+		<div class="aw-card-grid">
+			{articles.map((article) => <ArticleCard article={article} />)}
+		</div>
+	</div>
+</BaseLayout>

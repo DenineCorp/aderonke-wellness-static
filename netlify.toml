@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Netlify auto-detects the data-netlify="true" form in src/pages/contact.astro
+# once it's part of the built HTML — no functions or extra config needed.
