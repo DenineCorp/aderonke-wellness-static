@@ -1,5 +1,7 @@
 # Aderonke Wellness — static build (Netlify)
 
+**Live:** https://aderonke-wellness.netlify.app (preview mode — noindex, banner visible until `PUBLIC_SITE_STAGE=production` is set in Netlify's environment variables)
+
 A parallel version of the WordPress rebuild in the sibling `ADERONKE` project, built as a static site with [Astro](https://astro.build), so it can deploy to Netlify. See the [rebuild plan](https://claude.ai/artifact/2Tng4zR51xqDrCMe1cnU8j) for the full context.
 
 **This exists because Netlify cannot run the WordPress build.** Netlify hosts static files and small serverless functions — it has no PHP runtime and no database, both of which WordPress requires. This project is the same design system and the same 9 Phase 2 articles, rebuilt from scratch as plain HTML/CSS that Netlify *can* serve.
