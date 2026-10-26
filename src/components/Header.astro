@@ -1,4 +1,6 @@
 ---
+import Wordmark from './Wordmark.astro';
+
 interface Props {
 	currentPath: string;
 }
@@ -18,7 +20,9 @@ const navItems = [
 
 <header class="aw-site-header">
 	<div class="aw-header-inner">
-		<a class="aw-logo" href="/">Aderonke Wellness</a>
+		<a class="aw-logo" href="/" aria-label="Aderonke Wellness, home">
+			<Wordmark />
+		</a>
 
 		<button class="aw-nav-toggle" id="aw-nav-toggle" aria-expanded="false" aria-controls="aw-primary-menu">
 			Menu

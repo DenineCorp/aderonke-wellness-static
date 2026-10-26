@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import AuthorBox from '../../components/AuthorBox.astro';
 import Disclaimer from '../../components/Disclaimer.astro';
+import Icon from '../../components/Icon.astro';
 import { render } from 'astro:content';
 import { getPublishedArticles } from '../../lib/site';
 
@@ -51,11 +52,11 @@ const jsonLd = {
 <BaseLayout title={article.data.title} description={article.data.description} jsonLd={jsonLd}>
 	<header class="aw-article-header">
 		<div class="aw-container">
-			<p class="aw-card-eyebrow">{pillarLabels[article.data.pillar]}</p>
+			<p class="aw-card-eyebrow"><Icon name={article.data.pillar} /> {pillarLabels[article.data.pillar]}</p>
 			<h1>{article.data.title}</h1>
 			<p class="aw-article-meta">
 				By {article.data.author}, <span class="aw-credentials">{article.data.credentials}</span>{' '}
-				&mdash; last updated {formattedDate}
+				· last updated {formattedDate}
 			</p>
 		</div>
 	</header>

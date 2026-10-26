@@ -15,12 +15,19 @@ text fast and native-feeling rather than loading a second webfont).
 	--aw-color-primary: #3f5a4f;
 	--aw-color-primary-dark: #2e4339;
 	--aw-color-primary-tint: #e7ece7;
-	--aw-color-accent: #b5633f;
+	/* Accent darkened from the original #b5633f so button + eyebrow text
+	   clear WCAG AA (4.5:1) — see the Round 2 contrast report. */
+	--aw-color-accent: #9c5436;
+	--aw-color-accent-hover: #86452a;
 	--aw-color-accent-tint: #f3e3da;
+	/* Deep anchor colour (brand layer, Round 2): one full-width homepage
+	   band, the footer, and the primary link colour. */
+	--aw-color-deep: #17352d;
+	--aw-color-deep-text: #f5f1e8;
 	--aw-color-text: #2a2621;
 	--aw-color-text-muted: #675f54;
 	--aw-color-border: #e2d8c8;
-	--aw-focus-ring: #b5633f;
+	--aw-focus-ring: #9c5436;
 
 	--aw-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 	--aw-font-heading: 'Fraunces', Georgia, "Times New Roman", serif;
@@ -28,7 +35,27 @@ text fast and native-feeling rather than loading a second webfont).
 	--aw-font-size-base: 18px;
 	--aw-line-height: 1.65;
 	--aw-max-width: 1100px;
-	--aw-radius: 12px;
+	--aw-radius: 16px;
+
+	/* Motion tokens (transitions.dev scale). Used sparingly, per the
+	   brief: hover/focus/press feedback and the mobile nav disclosure
+	   only — nothing decorative, everything respects reduced motion. */
+	--duration-fast: 250ms;
+	--duration-quick: 150ms;
+	--ease-smooth-out: cubic-bezier(0.22, 1, 0.36, 1);
+	--blur-small: 2px;
+	--acc-expand: 250ms;
+	--acc-collapse: 250ms;
+	--acc-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*, *::before, *::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
 }
 
 /* ---------- Reset & base ---------- */
@@ -43,7 +70,11 @@ body {
 	background: var(--aw-color-bg);
 }
 img { max-width: 100%; height: auto; display: block; }
-a { color: var(--aw-color-primary-dark); text-decoration-thickness: 2px; }
+a {
+	color: var(--aw-color-deep);
+	text-decoration-thickness: 2px;
+	transition: color var(--duration-fast) var(--ease-smooth-out);
+}
 a:hover { color: var(--aw-color-primary); }
 
 a:focus-visible,
@@ -62,10 +93,14 @@ h1, h2, h3, h4 {
 	color: var(--aw-color-text);
 	margin: 0 0 0.6em;
 }
-h1 { font-size: clamp(2.1rem, 4.2vw, 3rem); font-weight: 500; }
+h1 { font-size: clamp(2.1rem, 4.2vw, 3rem); font-weight: 400; }
 h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); }
 h3 { font-size: 1.3rem; }
 p { margin: 0 0 1.2em; }
+
+.aw-icon { color: var(--aw-color-accent); }
+.aw-pillar-heading { display: flex; align-items: center; gap: 14px; }
+.aw-pillar-heading .aw-icon { width: 34px; height: 34px; flex-shrink: 0; }
 
 /* ---------- Layout ---------- */
 .aw-container {
@@ -99,12 +134,12 @@ p { margin: 0 0 1.2em; }
 	flex-wrap: wrap;
 }
 .aw-logo {
-	font-family: var(--aw-font-heading);
-	font-size: 1.4rem;
-	font-weight: 600;
+	display: inline-flex;
+	align-items: center;
 	color: var(--aw-color-text);
 	text-decoration: none;
 }
+.aw-wordmark { height: 26px; width: auto; display: block; color: inherit; }
 
 .aw-primary-nav ul {
 	list-style: none;
@@ -122,6 +157,7 @@ p { margin: 0 0 1.2em; }
 	color: var(--aw-color-text);
 	text-decoration: none;
 	border-radius: 8px;
+	transition: background-color var(--duration-fast) var(--ease-smooth-out), color var(--duration-fast) var(--ease-smooth-out);
 }
 .aw-primary-nav a:hover,
 .aw-primary-nav a[aria-current="page"] {
@@ -138,13 +174,37 @@ p { margin: 0 0 1.2em; }
 	border-radius: 8px;
 	font-size: 1rem;
 	cursor: pointer;
+	transition: background-color var(--duration-fast) var(--ease-smooth-out), transform var(--duration-quick) var(--ease-smooth-out);
 }
+.aw-nav-toggle:active { transform: scale(0.96); }
 
 @media (max-width: 760px) {
 	.aw-nav-toggle { display: inline-block; }
-	.aw-primary-nav { width: 100%; display: none; }
-	.aw-primary-nav.is-open { display: block; }
-	.aw-primary-nav ul { flex-direction: column; }
+	/* Accordion-expand pattern (transitions.dev #21): grid-template-rows
+	   0fr -> 1fr animates height with no JS measuring, the ul clips its
+	   own overflow and cross-fades in. Kept to this one disclosure. */
+	.aw-primary-nav {
+		width: 100%;
+		display: grid;
+		grid-template-rows: 0fr;
+		transition: grid-template-rows var(--acc-collapse) var(--acc-ease);
+	}
+	.aw-primary-nav.is-open {
+		grid-template-rows: 1fr;
+		transition: grid-template-rows var(--acc-expand) var(--acc-ease);
+	}
+	.aw-primary-nav ul {
+		flex-direction: column;
+		overflow: hidden;
+		opacity: 0;
+		filter: blur(var(--blur-small));
+		transition: opacity var(--acc-collapse) var(--acc-ease), filter var(--acc-collapse) var(--acc-ease);
+	}
+	.aw-primary-nav.is-open ul {
+		opacity: 1;
+		filter: blur(0);
+		transition: opacity var(--acc-expand) var(--acc-ease), filter var(--acc-expand) var(--acc-ease);
+	}
 }
 
 /* ---------- Social icons ---------- */
@@ -179,18 +239,30 @@ p { margin: 0 0 1.2em; }
 .aw-hero h1 { margin-bottom: 0.4em; }
 .aw-hero .aw-lede { font-size: 1.2rem; color: var(--aw-color-text-muted); max-width: 46ch; }
 
+/* Photo placeholders styled as intentional frames, ready to take a real
+   photo: swap the placeholder <span> for an <img> with these same
+   classes, add real alt text, and object-fit: cover (below) does the
+   rest since the aspect-ratio is already fixed. */
 .aw-photo-slot {
+	position: relative;
 	aspect-ratio: 4 / 5;
 	border-radius: var(--aw-radius);
-	background: var(--aw-color-bg-alt);
-	border: 1.5px dashed var(--aw-color-border);
+	background: linear-gradient(155deg, var(--aw-color-primary-tint) 0%, var(--aw-color-bg-alt) 100%);
+	border: 1px solid var(--aw-color-border);
+	overflow: hidden;
 	display: flex;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
+	align-items: flex-end;
 	color: var(--aw-color-text-muted);
-	font-size: 0.9rem;
-	padding: 20px;
+}
+.aw-photo-slot img { width: 100%; height: 100%; object-fit: cover; }
+.aw-photo-slot-label {
+	margin: 14px;
+	padding: 6px 12px;
+	border-radius: 999px;
+	background: rgba(251, 247, 240, 0.9);
+	border: 1px solid var(--aw-color-border);
+	font-size: 0.78rem;
+	line-height: 1.3;
 }
 .aw-photo-slot-wide { aspect-ratio: 16 / 10; }
 .aw-photo-slot-round {
@@ -198,7 +270,10 @@ p { margin: 0 0 1.2em; }
 	border-radius: 50%;
 	width: 160px;
 	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
 }
+.aw-photo-slot-round .aw-photo-slot-label { margin: 0; text-align: center; }
 
 .aw-btn {
 	display: inline-block;
@@ -212,12 +287,19 @@ p { margin: 0 0 1.2em; }
 	border: none;
 	cursor: pointer;
 	font-size: 1rem;
+	transition:
+		background-color var(--duration-fast) var(--ease-smooth-out),
+		transform var(--duration-quick) var(--ease-smooth-out);
 }
-.aw-btn:hover { background: #9c5436; color: #fff; }
+.aw-btn:hover { background: var(--aw-color-accent-hover); color: #fff; }
+.aw-btn:active { transform: scale(0.96); }
 .aw-btn-outline {
 	background: transparent;
 	color: var(--aw-color-primary-dark);
 	border: 2px solid var(--aw-color-primary);
+	transition:
+		background-color var(--duration-fast) var(--ease-smooth-out),
+		transform var(--duration-quick) var(--ease-smooth-out);
 }
 .aw-btn-outline:hover { background: var(--aw-color-primary-tint); }
 
@@ -233,19 +315,47 @@ p { margin: 0 0 1.2em; }
 }
 .aw-path-list li {
 	display: grid;
-	grid-template-columns: 1fr auto;
+	grid-template-columns: auto 1fr auto;
 	gap: 16px;
-	align-items: baseline;
+	align-items: center;
 	padding: 20px 0;
 	border-bottom: 1px solid var(--aw-color-border);
 }
+.aw-path-list .aw-path-icon {
+	width: 40px;
+	height: 40px;
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.08);
+	color: inherit;
+}
+.aw-path-list .aw-path-icon svg { width: 22px; height: 22px; }
 .aw-path-list h3 { margin: 0 0 4px; font-size: 1.15rem; }
 .aw-path-list p { margin: 0; color: var(--aw-color-text-muted); font-size: 0.95rem; }
 .aw-path-list a { white-space: nowrap; font-weight: 600; }
 
-/* ---------- Section rhythm ---------- */
+/* ---------- Section rhythm: full-bleed band + centered container,
+   alternating cream / sage tint / deep anchor down the page ---------- */
 .aw-section { padding: 48px 0; }
 .aw-section-alt { background: var(--aw-color-bg-alt); }
+.aw-section-tint { background: var(--aw-color-primary-tint); }
+.aw-section-deep {
+	background: var(--aw-color-deep);
+	color: var(--aw-color-deep-text);
+}
+.aw-section-deep h1,
+.aw-section-deep h2,
+.aw-section-deep h3,
+.aw-section-deep h4 { color: #fff; }
+.aw-section-deep a { color: #fff; text-decoration-color: rgba(255, 255, 255, 0.5); }
+.aw-section-deep a:hover { color: var(--aw-color-accent-tint); }
+.aw-section-deep .aw-path-list { border-top-color: rgba(255, 255, 255, 0.2); }
+.aw-section-deep .aw-path-list li { border-bottom-color: rgba(255, 255, 255, 0.2); }
+.aw-section-deep .aw-path-list p { color: rgba(245, 241, 232, 0.78); }
+.aw-section-deep .aw-icon { color: #fff; }
 .aw-section-head {
 	display: flex;
 	align-items: baseline;
@@ -258,17 +368,27 @@ p { margin: 0 0 1.2em; }
 /* ---------- Featured article (large, one post) ---------- */
 .aw-featured {
 	display: grid;
-	gap: 28px;
+	gap: 0;
 	border: 1px solid var(--aw-color-border);
 	border-radius: var(--aw-radius);
 	overflow: hidden;
 	background: var(--aw-color-bg);
 }
 @media (min-width: 760px) {
-	.aw-featured { grid-template-columns: 1fr 1fr; align-items: stretch; }
+	/* min-width: 0 on both tracks is the fix: without it, a grid item's
+	   default min-width is its content's min-content size, and the
+	   aspect-ratio media panel's min-content width (driven by the tall
+	   row the text column forces) out-grows its 1fr share and overlaps
+	   the text column instead of the row simply growing to fit. */
+	.aw-featured { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: stretch; }
 }
-.aw-featured-media { background: var(--aw-color-primary-tint); min-height: 220px; }
-.aw-featured-body { padding: 28px; display: flex; flex-direction: column; justify-content: center; }
+.aw-featured-media {
+	background: var(--aw-color-primary-tint);
+	min-height: 220px;
+	min-width: 0;
+	aspect-ratio: auto;
+}
+.aw-featured-body { padding: 32px; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
 .aw-featured-body h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); }
 
 /* ---------- Latest articles: a single combined list, not a card grid ---------- */
@@ -299,15 +419,24 @@ p { margin: 0 0 1.2em; }
 	background: var(--aw-color-bg);
 	display: flex;
 	flex-direction: column;
+	transition: transform var(--duration-fast) var(--ease-smooth-out), box-shadow var(--duration-fast) var(--ease-smooth-out);
+}
+.aw-card:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 10px 24px -14px rgba(42, 38, 33, 0.35);
 }
 .aw-card-body { padding: 18px; flex: 1; display: flex; flex-direction: column; }
 .aw-card-eyebrow {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
 	font-size: 0.78rem;
 	font-weight: 700;
 	text-transform: uppercase;
 	letter-spacing: 0.05em;
 	color: var(--aw-color-accent);
 }
+.aw-card-eyebrow .aw-icon { width: 14px; height: 14px; flex-shrink: 0; }
 .aw-card h3 { margin-bottom: 8px; font-size: 1.15rem; }
 .aw-card h3 a { color: var(--aw-color-text); text-decoration: none; }
 .aw-card h3 a:hover { color: var(--aw-color-primary-dark); }
@@ -321,6 +450,14 @@ p { margin: 0 0 1.2em; }
 	text-align: center;
 	padding: 8px 0;
 }
+.aw-pull-quote-mark {
+	display: block;
+	font-family: var(--aw-font-heading);
+	font-size: 4rem;
+	line-height: 1;
+	color: var(--aw-color-accent);
+	margin-bottom: -0.6rem;
+}
 .aw-pull-quote blockquote {
 	margin: 0;
 	font-family: var(--aw-font-heading);
@@ -330,11 +467,21 @@ p { margin: 0 0 1.2em; }
 	line-height: 1.45;
 }
 .aw-pull-quote cite {
-	display: block;
-	margin-top: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	margin-top: 20px;
 	font-style: normal;
 	font-size: 0.95rem;
 	color: var(--aw-color-text-muted);
+}
+.aw-pull-quote cite::before {
+	content: '';
+	display: inline-block;
+	width: 32px;
+	height: 2px;
+	background: var(--aw-color-accent);
 }
 
 /* ---------- About strip (split photo + text) ---------- */
@@ -465,24 +612,47 @@ p { margin: 0 0 1.2em; }
 	font-size: 1rem;
 }
 
-/* ---------- Footer ---------- */
+/* ---------- Footer (deep anchor band) ---------- */
 .aw-site-footer {
-	border-top: 1px solid var(--aw-color-border);
-	background: var(--aw-color-bg-alt);
-	padding: 40px 0;
+	background: var(--aw-color-deep);
+	color: var(--aw-color-deep-text);
+	padding: 48px 0 32px;
 	margin-top: 48px;
 }
-.aw-footer-inner {
+.aw-footer-top {
+	display: grid;
+	gap: 32px;
+	padding-bottom: 32px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+}
+@media (min-width: 700px) {
+	.aw-footer-top { grid-template-columns: 1fr auto; align-items: start; }
+}
+.aw-footer-brand .aw-logo { color: #fff; margin-bottom: 12px; }
+.aw-footer-brand .aw-wordmark { height: 24px; }
+.aw-footer-brand p { max-width: 38ch; color: rgba(245, 241, 232, 0.78); margin: 0; font-size: 0.95rem; }
+.aw-footer-nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 12px 20px; margin: 0; padding: 0; }
+.aw-footer-nav a { color: #fff; text-decoration: none; font-size: 0.95rem; }
+.aw-footer-nav a:hover { color: var(--aw-color-accent-tint); }
+.aw-footer-crisis {
+	padding: 20px 0;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+	font-size: 0.95rem;
+	color: rgba(245, 241, 232, 0.9);
+}
+.aw-footer-crisis strong { color: #fff; }
+.aw-footer-bottom {
+	padding-top: 24px;
 	display: flex;
 	flex-wrap: wrap;
-	gap: 24px;
+	gap: 16px 24px;
 	justify-content: space-between;
 	align-items: center;
 }
-.aw-footer-nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 16px; margin: 0; padding: 0; }
-.aw-footer-nav a { color: var(--aw-color-text-muted); text-decoration: none; }
-.aw-footer-nav a:hover { color: var(--aw-color-primary-dark); }
-.aw-footer-copy { color: var(--aw-color-text-muted); font-size: 0.9rem; }
+.aw-footer-legal ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 0; padding: 0; }
+.aw-footer-legal a { color: rgba(245, 241, 232, 0.78); text-decoration: none; font-size: 0.85rem; }
+.aw-footer-legal a:hover { color: #fff; }
+.aw-footer-copy { color: rgba(245, 241, 232, 0.65); font-size: 0.85rem; margin: 0; }
 
 .screen-reader-text {
 	position: absolute !important;

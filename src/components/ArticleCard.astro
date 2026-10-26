@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import Icon from './Icon.astro';
 
 interface Props {
 	article: CollectionEntry<'articles'>;
@@ -22,7 +23,7 @@ const formattedDate = article.data.pubDate.toLocaleDateString('en-CA', {
 
 <article class="aw-card">
 	<div class="aw-card-body">
-		<p class="aw-card-eyebrow">{pillarLabels[article.data.pillar]}</p>
+		<p class="aw-card-eyebrow"><Icon name={article.data.pillar} /> {pillarLabels[article.data.pillar]}</p>
 		<h3><a href={href}>{article.data.title}</a></h3>
 		<p class="aw-card-excerpt">{article.data.description}</p>
 		<p class="aw-card-date">{formattedDate}</p>

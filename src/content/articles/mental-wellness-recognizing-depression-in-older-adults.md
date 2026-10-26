@@ -7,13 +7,13 @@ updatedDate: 2026-09-15
 author: "Aderonke Agboji"
 credentials: "RN, PhD Candidate"
 ---
-It's easy to write off a parent's low mood, withdrawal, or forgetfulness as "just getting older." Sometimes that's exactly what it is. But clinical depression is **not** a normal part of aging — even though it's common in older adults — and in seniors it frequently doesn't look like the sadness most people picture when they hear the word "depression."
+It's easy to write off a parent's low mood, withdrawal, or forgetfulness as "just getting older." Sometimes that's exactly what it is. But clinical depression is **not** a normal part of aging, even though it's common in older adults, and in seniors it frequently doesn't look like the sadness most people picture when they hear the word "depression."
 
 ## Normal aging involves sadness. Depression involves staying stuck.
 
-Feeling down occasionally — after a hard diagnosis, the death of a friend, or a difficult anniversary — is a normal part of life at any age. Most older adults, even those managing real physical illness, report being satisfied with their lives overall.
+Feeling down occasionally, whether after a hard diagnosis, the death of a friend, or a difficult anniversary, is a normal part of life at any age. Most older adults, even those managing real physical illness, report being satisfied with their lives overall.
 
-The difference is duration and function. If low mood, loss of interest, or hopelessness lasts for weeks rather than days, and starts interfering with sleep, appetite, relationships, or daily routines, that's no longer "a rough patch" — it meets the bar for a condition that responds to treatment.
+The difference is duration and function. If low mood, loss of interest, or hopelessness lasts for weeks rather than days, and starts interfering with sleep, appetite, relationships, or daily routines, that's no longer "a rough patch." It meets the bar for a condition that responds to treatment.
 
 ## In older adults, depression often hides behind other symptoms
 
@@ -21,7 +21,7 @@ This is the part caregivers miss most often: older adults are frequently relucta
 
 - **Memory complaints** that get mistaken for early dementia
 - **Vague, hard-to-pin-down physical aches** with no clear medical cause
-- **Changes in self-care** — skipped medications, skipped showers, a kitchen that's suddenly bare
+- **Changes in self-care**: skipped medications, skipped showers, a kitchen that's suddenly bare
 - **Irritability** rather than visible sadness
 - **Social withdrawal**, or sleeping far more (or less) than usual
 
@@ -35,13 +35,13 @@ A few factors make depression more likely in later life, and they're worth watch
 - A family history of depression
 - Social isolation or loneliness, especially after the loss of a spouse or the ability to drive
 - Low physical activity
-- New functional limitations — difficulty with tasks that used to be routine
+- New functional limitations: difficulty with tasks that used to be routine
 
 None of these guarantee depression will develop. They're reasons to pay closer attention, not reasons to assume the worst.
 
 ## What to do if you notice these signs
 
-1. **Start with a real conversation, not a diagnosis.** "I've noticed you seem more tired and less interested in your garden lately — how are you actually doing?" opens a door that "Are you depressed?" tends to close.
+1. **Start with a real conversation, not a diagnosis.** "I've noticed you seem more tired and less interested in your garden lately. How are you actually doing?" opens a door that "Are you depressed?" tends to close.
 2. **Rule out physical causes first.** Thyroid problems, medication side effects, vitamin deficiencies, and sleep disorders can all produce depression-like symptoms. A primary care visit should be the first step, not a last resort.
 3. **Take it seriously even without visible sadness.** If the person is isolating, neglecting self-care, or expressing hopelessness in any form, treat that as depression until a professional says otherwise.
 4. **Know that treatment works.** For most people, depression improves with the right combination of talk therapy, medication, and addressing the underlying isolation or illness driving it. This isn't about "toughing it out."

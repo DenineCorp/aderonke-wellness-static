@@ -4,11 +4,15 @@ interface Props {
 	attribution: string;
 }
 const { quote, attribution } = Astro.props;
+/* needs client confirmation: Aderonke should confirm she's comfortable
+   with this exact quote (pulled from her About page copy) being reused
+   as a standalone homepage pull quote before this goes live. */
 ---
 
 <div class="aw-container aw-section aw-pull-quote">
+	<span class="aw-pull-quote-mark" aria-hidden="true">&ldquo;</span>
 	<blockquote>
-		<p>&ldquo;{quote}&rdquo;</p>
+		<p>{quote}</p>
 	</blockquote>
 	<cite>— {attribution}</cite>
 </div>

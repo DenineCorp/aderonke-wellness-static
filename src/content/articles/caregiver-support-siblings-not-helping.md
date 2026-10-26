@@ -7,16 +7,16 @@ updatedDate: 2026-10-01
 author: "Aderonke Agboji"
 credentials: "RN, PhD Candidate"
 ---
-In roughly 43% of American families providing care for aging parents, the work falls mainly on one sibling. If that's you, the resentment building toward your brothers and sisters is not a character flaw — it's a predictable response to an unbalanced load. The good news is that the Family Caregiver Alliance's research-backed approach to this is specific and actionable, not just "communicate better."
+In roughly 43% of American families providing care for aging parents, the work falls mainly on one sibling. If that's you, the resentment building toward your brothers and sisters is not a character flaw. It's a predictable response to an unbalanced load. The good news is that the Family Caregiver Alliance's research-backed approach to this is specific and actionable, not just "communicate better."
 
-## Why siblings don't help — it's rarely just laziness
+## Why siblings don't help: it's rarely just laziness
 
 Before the conversation, it helps to understand what's actually going on, because the fix is different depending on the cause:
 
 - **They genuinely don't know how hard it is.** If you haven't described the day-to-day reality, your siblings may have no accurate picture of it. Caregivers often assume their situation is obvious to family members who simply aren't there to see it.
-- **Old family roles are resurfacing.** Research on sibling caregiving has found that when one sibling becomes the designated caregiver, it frequently echoes childhood dynamics — the responsible one, the distant one — rather than reflecting anyone's current capacity or willingness.
+- **Old family roles are resurfacing.** Research on sibling caregiving has found that when one sibling becomes the designated caregiver, it frequently echoes childhood dynamics, like the responsible one or the distant one, rather than reflecting anyone's current capacity or willingness.
 - **They don't know what to offer.** A vague "I could use some help" is easy to let slide. A specific ask is much harder to ignore.
-- **Distance feels like a disqualifier.** Siblings who live far away sometimes assume they can't meaningfully contribute, when in fact they can — more on that below.
+- **Distance feels like a disqualifier.** Siblings who live far away sometimes assume they can't meaningfully contribute, when in fact they can. More on that below.
 
 ## Start here: get specific about what you need
 
@@ -30,18 +30,18 @@ A sibling who lives across the country can still carry real weight: regular chec
 
 The Family Caregiver Alliance recommends a structured family meeting when informal conversations stall. What makes these work:
 
-1. **Bring in a neutral facilitator** — a social worker, geriatric care manager, or counselor — rather than running it yourself. It keeps the conversation from collapsing into old patterns.
+1. **Bring in a neutral facilitator**, such as a social worker, geriatric care manager, or counselor, rather than running it yourself. It keeps the conversation from collapsing into old patterns.
 2. **Set an agenda in advance** so the meeting stays on the care plan, not on old grievances.
 3. **Share feelings, not accusations.** "I'm exhausted and I need help with Tuesdays" lands differently than "you never help."
-4. **Leave with specific commitments**, not general goodwill — who's doing what, starting when.
+4. **Leave with specific commitments**, not general goodwill: who's doing what, starting when.
 
 ## When siblings still won't agree
 
-If conflict persists even after a structured conversation, a professional care manager can take over as the objective third party building the care plan — which removes the need for siblings to negotiate directly with each other at all. This isn't giving up on family involvement; it's recognizing that some family dynamics need a structure outside the family to actually resolve.
+If conflict persists even after a structured conversation, a professional care manager can take over as the objective third party building the care plan, which removes the need for siblings to negotiate directly with each other at all. This isn't giving up on family involvement; it's recognizing that some family dynamics need a structure outside the family to actually resolve.
 
 ## What this isn't about
 
-This isn't about guilting siblings into helping, or keeping score. It's about making sure the caregiving load has a chance of being distributed before it breaks the person carrying it. If you've tried the direct approach and the specific asks and it's still just you, that's worth naming to yourself plainly — and it's a strong signal to lean harder into the outside support described in our [caregiver burnout guide](/caregiver-support/caregiver-burnout-warning-signs/).
+This isn't about guilting siblings into helping, or keeping score. It's about making sure the caregiving load has a chance of being distributed before it breaks the person carrying it. If you've tried the direct approach and the specific asks and it's still just you, that's worth naming to yourself plainly, and it's a strong signal to lean harder into the outside support described in our [caregiver burnout guide](/caregiver-support/caregiver-burnout-warning-signs/).
 
 ---
 

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
+import Icon from '../../components/Icon.astro';
 import { getPublishedArticles } from '../../lib/site';
 
 const articles = (await getPublishedArticles()).filter((a) => a.data.pillar === 'mental-wellness');
@@ -11,11 +12,11 @@ const articles = (await getPublishedArticles()).filter((a) => a.data.pillar === 
 	description="Nursing-informed, sourced guidance on mood, memory, and emotional wellbeing in older adults."
 >
 	<header class="aw-container aw-section">
-		<h1>Mental Wellness</h1>
+		<h1 class="aw-pillar-heading"><Icon name="mental-wellness" /> Mental Wellness</h1>
 		<div class="aw-article-body">
-			<p>Mental health changes in later life are common — and often missed, because they don't always look like what we expect. A senior who seems "just tired" or "a little forgetful lately" may be showing early signs of depression, anxiety, or loneliness, not normal aging.</p>
+			<p>Mental health changes in later life are common, and often missed, because they don't always look like what we expect. A senior who seems "just tired" or "a little forgetful lately" may be showing early signs of depression, anxiety, or loneliness, not normal aging.</p>
 			<p>This section covers mood, memory, and emotional wellbeing in older adults: how to tell ordinary aging apart from something that needs attention, what treatment actually looks like, and how to start the conversation with a parent, spouse, or patient who may be reluctant to talk about it.</p>
-			<p>Every article here is written or reviewed by Aderonke Agboji, RN, PhD Candidate in Health Sciences, and sourced to recognized health authorities — not generic advice. See our <a href="/editorial-policy/">Editorial Policy</a> for how we research and review.</p>
+			<p>Every article here is written or reviewed by Aderonke Agboji, RN, PhD Candidate in Health Sciences, and sourced to recognized health authorities, not generic advice. See our <a href="/editorial-policy/">Editorial Policy</a> for how we research and review.</p>
 		</div>
 	</header>
 

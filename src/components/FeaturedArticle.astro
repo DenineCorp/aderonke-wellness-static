@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import Icon from './Icon.astro';
 
 interface Props {
 	article: CollectionEntry<'articles'>;
@@ -17,10 +18,10 @@ const href = `/${article.data.pillar}/${article.id}/`;
 
 <article class="aw-featured">
 	<div class="aw-featured-media aw-photo-slot aw-photo-slot-wide" aria-hidden="true">
-		Image placeholder
+		<span class="aw-photo-slot-label">Photo pending</span>
 	</div>
 	<div class="aw-featured-body">
-		<p class="aw-card-eyebrow">{pillarLabels[article.data.pillar]} · Featured</p>
+		<p class="aw-card-eyebrow"><Icon name={article.data.pillar} /> {pillarLabels[article.data.pillar]} · Featured</p>
 		<h2><a href={href} style="color: inherit; text-decoration: none;">{article.data.title}</a></h2>
 		<p>{article.data.description}</p>
 		<p><a href={href}>Read the article →</a></p>

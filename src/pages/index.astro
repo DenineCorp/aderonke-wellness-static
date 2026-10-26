@@ -6,6 +6,7 @@ import AboutStrip from '../components/AboutStrip.astro';
 import Newsletter from '../components/Newsletter.astro';
 import CrisisBlock from '../components/CrisisBlock.astro';
 import Testimonials from '../components/Testimonials.astro';
+import Icon from '../components/Icon.astro';
 import { getPublishedArticles } from '../lib/site';
 
 const published = await getPublishedArticles();
@@ -22,7 +23,7 @@ const jsonLd = {
 	'@context': 'https://schema.org',
 	'@type': 'WebSite',
 	name: 'Aderonke Wellness',
-	url: Astro.site ?? 'https://aderonkewellness.netlify.app',
+	url: Astro.site ?? 'https://aderonke-wellness.netlify.app',
 };
 ---
 
@@ -37,50 +38,57 @@ const jsonLd = {
 			<div>
 				<h1>Steady, honest guidance for the hardest parts of caregiving</h1>
 				<p class="aw-lede">
-					Nursing-informed articles on mental wellness, dementia care, and caregiving — written for seniors, families, and care staff.
+					Nursing-informed articles on mental wellness, dementia care, and caregiving, written for seniors, families, and care staff.
 				</p>
 				<p>
 					<a class="aw-btn" href="/mental-wellness/">Start reading</a>
 				</p>
 			</div>
 			<div class="aw-photo-slot" aria-hidden="true">
-				Photo placeholder — Aderonke's photo goes here
+				<span class="aw-photo-slot-label">Aderonke's photo, pending</span>
 			</div>
 		</div>
 	</section>
 
 	<!-- 2. Who are you here for? -->
-	<section class="aw-container aw-path-picker">
-		<h2>Who are you here for?</h2>
-		<ul class="aw-path-list">
-			<li>
-				<div>
-					<h3>Seniors</h3>
-					<p>Plain-language articles on mood, memory, and staying connected.</p>
-				</div>
-				<a href="/mental-wellness/">Mental Wellness →</a>
-			</li>
-			<li>
-				<div>
-					<h3>Family Caregivers</h3>
-					<p>Practical support for the day-to-day of caring for an aging loved one.</p>
-				</div>
-				<a href="/caregiver-support/">Caregiver Support →</a>
-			</li>
-			<li>
-				<div>
-					<h3>Facility &amp; Care Staff</h3>
-					<p>Dementia and cognitive-care guidance grounded in Aderonke's long-term care background.</p>
-				</div>
-				<a href="/dementia-care/">Dementia &amp; Cognitive Care →</a>
-			</li>
-		</ul>
+	<section class="aw-path-picker aw-section-deep">
+		<div class="aw-container">
+			<h2>Who are you here for?</h2>
+			<ul class="aw-path-list">
+				<li>
+					<span class="aw-path-icon" aria-hidden="true"><Icon name="seniors" /></span>
+					<div>
+						<h3>Seniors</h3>
+						<p>Plain-language articles on mood, memory, and staying connected.</p>
+					</div>
+					<a href="/mental-wellness/">Mental Wellness →</a>
+				</li>
+				<li>
+					<span class="aw-path-icon" aria-hidden="true"><Icon name="caregivers" /></span>
+					<div>
+						<h3>Family Caregivers</h3>
+						<p>Practical support for the day-to-day of caring for an aging loved one.</p>
+					</div>
+					<a href="/caregiver-support/">Caregiver Support →</a>
+				</li>
+				<li>
+					<span class="aw-path-icon" aria-hidden="true"><Icon name="care-staff" /></span>
+					<div>
+						<h3>Facility &amp; Care Staff</h3>
+						<p>Dementia and cognitive-care guidance grounded in Aderonke's long-term care background.</p>
+					</div>
+					<a href="/dementia-care/">Dementia &amp; Cognitive Care →</a>
+				</li>
+			</ul>
+		</div>
 	</section>
 
 	<!-- 3. Featured article -->
 	{featured && (
-		<section class="aw-container aw-section">
-			<FeaturedArticle article={featured} />
+		<section class="aw-section">
+			<div class="aw-container">
+				<FeaturedArticle article={featured} />
+			</div>
 		</section>
 	)}
 
@@ -92,24 +100,26 @@ const jsonLd = {
 
 	<!-- 4. Latest articles: one combined list -->
 	{latest.length > 0 && (
-		<section class="aw-container aw-section aw-section-alt">
-			<div class="aw-section-head">
-				<h2>Latest articles</h2>
+		<section class="aw-section aw-section-tint">
+			<div class="aw-container">
+				<div class="aw-section-head">
+					<h2>Latest articles</h2>
+				</div>
+				<ul class="aw-latest-list">
+					{latest.map((article) => (
+						<li>
+							<div>
+								<p class="aw-card-eyebrow"><Icon name={article.data.pillar} /> {pillarLabels[article.data.pillar]}</p>
+								<h3><a href={`/${article.data.pillar}/${article.id}/`}>{article.data.title}</a></h3>
+							</div>
+							<time datetime={article.data.pubDate.toISOString()}>
+								{article.data.pubDate.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' })}
+							</time>
+							<p class="aw-latest-excerpt">{article.data.description}</p>
+						</li>
+					))}
+				</ul>
 			</div>
-			<ul class="aw-latest-list">
-				{latest.map((article) => (
-					<li>
-						<div>
-							<p class="aw-card-eyebrow">{pillarLabels[article.data.pillar]}</p>
-							<h3><a href={`/${article.data.pillar}/${article.id}/`}>{article.data.title}</a></h3>
-						</div>
-						<time datetime={article.data.pubDate.toISOString()}>
-							{article.data.pubDate.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' })}
-						</time>
-						<p class="aw-latest-excerpt">{article.data.description}</p>
-					</li>
-				))}
-			</ul>
 		</section>
 	)}
 
@@ -120,8 +130,10 @@ const jsonLd = {
 	<AboutStrip />
 
 	<!-- 6. Newsletter: only renders a real form once Kit is connected -->
-	<section class="aw-container aw-section">
-		<Newsletter />
+	<section class="aw-section">
+		<div class="aw-container">
+			<Newsletter />
+		</div>
 	</section>
 
 	<!-- 7. Crisis support -->

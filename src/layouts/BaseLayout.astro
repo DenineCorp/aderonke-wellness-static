@@ -12,8 +12,8 @@ interface Props {
 }
 const { title, description, jsonLd, ogImage } = Astro.props;
 const currentPath = Astro.url.pathname;
-const fullTitle = `${title} — Aderonke Wellness`;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://aderonkewellness.netlify.app');
+const fullTitle = `${title} · Aderonke Wellness`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://aderonke-wellness.netlify.app');
 ---
 
 <!doctype html>
@@ -44,7 +44,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://aderonke
 <body>
 	{isPreview && (
 		<div class="aw-preview-banner">
-			Internal preview — not the live site. Set PUBLIC_SITE_STAGE=production in Netlify to remove this banner and allow search indexing.
+			Preview version for your review. Not yet public.
 		</div>
 	)}
 	<Header currentPath={currentPath} />
