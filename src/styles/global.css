@@ -92,10 +92,16 @@ h1, h2, h3, h4 {
 	line-height: 1.2;
 	color: var(--aw-color-text);
 	margin: 0 0 0.6em;
+	max-width: 100%;
+	overflow-wrap: anywhere;
 }
 h1 { font-size: clamp(2.1rem, 4.2vw, 3rem); font-weight: 400; }
 h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); }
 h3 { font-size: 1.3rem; }
+p, li, blockquote {
+	max-width: 100%;
+	overflow-wrap: anywhere;
+}
 p { margin: 0 0 1.2em; }
 
 .aw-icon { color: var(--aw-color-accent); }
@@ -106,7 +112,11 @@ p { margin: 0 0 1.2em; }
 .aw-container {
 	max-width: var(--aw-max-width);
 	margin: 0 auto;
-	padding: 0 24px;
+	/* padding-inline (not the `padding` shorthand) so this never fights
+	   with a combined class's own padding shorthand, e.g. `.aw-section`
+	   below — that collision was zeroing the horizontal gutter on every
+	   inner page that used class="aw-container aw-section". */
+	padding-inline: clamp(20px, 5vw, 32px);
 }
 .aw-skip-link {
 	position: absolute;
@@ -130,7 +140,9 @@ p { margin: 0 0 1.2em; }
 	align-items: center;
 	justify-content: space-between;
 	gap: 24px;
-	padding: 16px 24px;
+	padding-block: 16px;
+	padding-inline: clamp(20px, 5vw, 32px);
+	padding-top: calc(16px + env(safe-area-inset-top, 0px));
 	flex-wrap: wrap;
 }
 .aw-logo {
@@ -167,15 +179,22 @@ p { margin: 0 0 1.2em; }
 
 .aw-nav-toggle {
 	display: none;
+	-webkit-appearance: none;
+	appearance: none;
 	min-width: 44px;
 	min-height: 44px;
-	border: 1px solid var(--aw-color-border);
+	padding: 0 16px;
+	border: 2px solid var(--aw-color-primary);
 	background: var(--aw-color-bg);
+	color: var(--aw-color-primary-dark);
 	border-radius: 8px;
-	font-size: 1rem;
+	font-family: inherit;
+	font-size: 1.125rem;
+	font-weight: 600;
 	cursor: pointer;
 	transition: background-color var(--duration-fast) var(--ease-smooth-out), transform var(--duration-quick) var(--ease-smooth-out);
 }
+.aw-nav-toggle:hover { background: var(--aw-color-primary-tint); }
 .aw-nav-toggle:active { transform: scale(0.96); }
 
 @media (max-width: 760px) {
@@ -231,7 +250,7 @@ p { margin: 0 0 1.2em; }
 .aw-social-links a:hover { background: var(--aw-color-primary); color: #fff; }
 
 /* ---------- Hero (with a real photo slot) ---------- */
-.aw-hero { background: var(--aw-color-primary-tint); padding: 56px 0; }
+.aw-hero { background: var(--aw-color-primary-tint); padding-block: 56px; }
 .aw-hero-inner { display: grid; gap: 36px; align-items: center; }
 @media (min-width: 760px) {
 	.aw-hero-inner { grid-template-columns: 1fr 0.85fr; }
@@ -304,7 +323,7 @@ p { margin: 0 0 1.2em; }
 .aw-btn-outline:hover { background: var(--aw-color-primary-tint); }
 
 /* ---------- Path picker (restyled: a row, not identical cards) ---------- */
-.aw-path-picker { padding: 56px 0; }
+.aw-path-picker { padding-block: 56px; }
 .aw-path-list {
 	list-style: none;
 	margin: 24px 0 0;
@@ -334,12 +353,42 @@ p { margin: 0 0 1.2em; }
 }
 .aw-path-list .aw-path-icon svg { width: 22px; height: 22px; }
 .aw-path-list h3 { margin: 0 0 4px; font-size: 1.15rem; }
-.aw-path-list p { margin: 0; color: var(--aw-color-text-muted); font-size: 0.95rem; }
+.aw-path-list p { margin: 0; color: var(--aw-color-text-muted); font-size: 1rem; }
 .aw-path-list a { white-space: nowrap; font-weight: 600; }
+
+/* Under 640px the icon|text|link row is too cramped (title wraps one
+   word per line, the link runs past the edge). Stack instead: icon +
+   title share a row, description runs full width below, link last.
+   `display: contents` on the text wrapper lets its h3/p become direct
+   grid children of the li so each can get its own grid-area. */
+@media (max-width: 640px) {
+	.aw-path-list li {
+		grid-template-columns: auto 1fr;
+		grid-template-areas:
+			"icon title"
+			"desc desc"
+			"link link";
+		row-gap: 6px;
+		align-items: start;
+	}
+	.aw-path-list li > div { display: contents; }
+	.aw-path-icon { grid-area: icon; }
+	.aw-path-list h3 { grid-area: title; align-self: center; margin: 0; }
+	.aw-path-list p { grid-area: desc; }
+	.aw-path-list a {
+		grid-area: link;
+		white-space: normal;
+		overflow-wrap: anywhere;
+		justify-self: start;
+	}
+}
 
 /* ---------- Section rhythm: full-bleed band + centered container,
    alternating cream / sage tint / deep anchor down the page ---------- */
-.aw-section { padding: 48px 0; }
+.aw-section { padding-block: 48px; }
+@media (max-width: 640px) {
+	.aw-section { padding-block: 32px; }
+}
 .aw-section-alt { background: var(--aw-color-bg-alt); }
 .aw-section-tint { background: var(--aw-color-primary-tint); }
 .aw-section-deep {
@@ -406,11 +455,11 @@ p { margin: 0 0 1.2em; }
 .aw-latest-list h3 a:hover { color: var(--aw-color-primary-dark); }
 .aw-latest-list .aw-card-eyebrow { margin-bottom: 4px; }
 .aw-latest-list time { color: var(--aw-color-text-muted); font-size: 0.85rem; white-space: nowrap; }
-.aw-latest-excerpt { color: var(--aw-color-text-muted); font-size: 0.95rem; margin: 0; grid-column: 1 / -1; }
+.aw-latest-excerpt { color: var(--aw-color-text-muted); font-size: 1rem; margin: 0; grid-column: 1 / -1; }
 
 /* Card (still used on pillar hub pages) */
-.aw-card-grid { display: grid; gap: 24px; grid-template-columns: 1fr; }
-@media (min-width: 640px) { .aw-card-grid { grid-template-columns: repeat(2, 1fr); } }
+.aw-card-grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .aw-card-grid { gap: 24px; grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 980px) { .aw-card-grid { grid-template-columns: repeat(3, 1fr); } }
 .aw-card {
 	border: 1px solid var(--aw-color-border);
@@ -440,7 +489,7 @@ p { margin: 0 0 1.2em; }
 .aw-card h3 { margin-bottom: 8px; font-size: 1.15rem; }
 .aw-card h3 a { color: var(--aw-color-text); text-decoration: none; }
 .aw-card h3 a:hover { color: var(--aw-color-primary-dark); }
-.aw-card-excerpt { color: var(--aw-color-text-muted); font-size: 0.95rem; }
+.aw-card-excerpt { color: var(--aw-color-text-muted); font-size: 1rem; }
 .aw-card-date { color: var(--aw-color-text-muted); font-size: 0.85rem; margin-top: auto; padding-top: 8px; }
 
 /* ---------- Pull quote ---------- */
@@ -496,6 +545,7 @@ p { margin: 0 0 1.2em; }
 .aw-about-strip h2 { margin-bottom: 0.3em; }
 
 /* ---------- Crisis block ---------- */
+.aw-crisis-wrap { padding-block-end: 48px; }
 .aw-crisis {
 	border: 1.5px solid var(--aw-color-accent);
 	background: var(--aw-color-accent-tint);
@@ -513,7 +563,7 @@ p { margin: 0 0 1.2em; }
 .aw-crisis a.aw-btn:hover { background: #000; }
 
 /* ---------- Article ---------- */
-.aw-article-header { padding: 40px 0 0; }
+.aw-article-header { padding-block-start: 40px; }
 .aw-article-meta {
 	color: var(--aw-color-text-muted);
 	font-size: 0.95rem;
@@ -616,7 +666,7 @@ p { margin: 0 0 1.2em; }
 .aw-site-footer {
 	background: var(--aw-color-deep);
 	color: var(--aw-color-deep-text);
-	padding: 48px 0 32px;
+	padding-block: 48px 32px;
 	margin-top: 48px;
 }
 .aw-footer-top {
@@ -668,7 +718,9 @@ p { margin: 0 0 1.2em; }
 	background: var(--aw-color-text);
 	color: #fff;
 	text-align: center;
-	padding: 8px 16px;
+	padding-block: 8px;
+	padding-inline: clamp(16px, 5vw, 24px);
+	padding-top: calc(8px + env(safe-area-inset-top, 0px));
 	font-size: 0.8rem;
 }
 .aw-preview-banner a { color: #fff; }
