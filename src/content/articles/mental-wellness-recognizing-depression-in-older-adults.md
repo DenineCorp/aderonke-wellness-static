@@ -48,7 +48,7 @@ None of these guarantee depression will develop. They're reasons to pay closer a
 
 ## If someone is in crisis
 
-If a loved one talks about not wanting to be here anymore, giving away possessions, or having no reason to go on, don't wait for a scheduled appointment. In the United States, call or text **988** to reach the Suicide & Crisis Lifeline, or call 911 if there's immediate danger.
+If a loved one talks about not wanting to be here anymore, giving away possessions, or having no reason to go on, don't wait for a scheduled appointment. Call or text **988** to reach the 9-8-8 Suicide Crisis Helpline, free and available 24/7 across Canada, or call 911 if there's immediate danger.
 
 ---
 
